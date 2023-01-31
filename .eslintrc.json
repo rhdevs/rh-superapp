@@ -1,3 +1,66 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:security/recommended",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["react", "@typescript-eslint", "security", "unused-imports", "prettier"],
+  "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "error",
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/destructuring-assignment": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "import/no-unresolved": "off",
+    "security/detect-object-injection": "off"
+  }
 }
+
