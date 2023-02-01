@@ -89,7 +89,8 @@ export default function Contact() {
                   key={index}
                   fontType={body}
                   href={socialMedia.links[item]}
-                  target="_blank">
+                  target="_blank"
+                >
                   {item}
                 </ContactLink>
               ))}
