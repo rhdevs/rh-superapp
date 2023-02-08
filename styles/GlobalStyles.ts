@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    background: ${(props) => props.theme.palette.common.black};
+    background: ${(props) => props.theme.palette.common.white};
     font-family: -apple-system, Inter, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
       'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;

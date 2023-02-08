@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import styled, { FontType, useTheme } from 'styled-components'
 
+import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 import { contactHeaders, contactMethods, socialMedia } from '@/texts/common/rhdevsInfo'
-import ContactForm from '@/components/ContactForm'
-import ClickToCopySection from '@/components/ClickToCopySection'
+import ContactForm from '@/components/sample-rhdevs-website/ContactForm'
+import ClickToCopySection from '@/components/sample-rhdevs-website/ClickToCopySection'
 
-import { InformationMainContainer } from '@/styles/GlobalStyledComponents'
-import { fontTypeCss } from '@/styles/index.styled'
+import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
+import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
 import logo from '@/assets/logo.png'
 
@@ -68,7 +69,7 @@ const ContactLink = styled.a<{ fontType: FontType }>`
   text-decoration: none;
 `
 
-export default function Contact() {
+function Contact() {
   const theme = useTheme()
   const { body, h1, h2 } = { ...theme.typography.fontSize }
   return (
@@ -103,3 +104,5 @@ export default function Contact() {
     </MainContainer>
   )
 }
+
+export default rhdevsWebsiteWrapper(Contact)

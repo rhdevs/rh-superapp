@@ -1,5 +1,7 @@
-import styled, { css, FontType } from 'styled-components'
-import { fontTypeCss } from '@/styles/index.styled'
+import Link from 'next/link'
+import { MouseEventHandler } from 'react'
+import styled, { css, FontType, useTheme } from 'styled-components'
+import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
 const activeCss = css`
   color: ${(props) => props.theme.palette.primary};
@@ -22,7 +24,7 @@ const inactiveCss = css`
   }
 `
 
-export const StyledNavItem = styled.div<{ isActive?: boolean; fontType: FontType }>`
+const StyledNavItem = styled.div<{ isActive?: boolean; fontType: FontType }>`
   height: 100%;
   width: fit-content;
   display: flex;
@@ -38,3 +40,27 @@ export const StyledNavItem = styled.div<{ isActive?: boolean; fontType: FontType
     font-size: 12px;
   }
 `
+
+type NavItemProps = {
+  text: string
+  href?: string
+  isActive?: boolean
+  onClick?: MouseEventHandler<HTMLDivElement>
+}
+
+const defaultProps = {
+  isActive: false,
+  onClick: undefined,
+}
+
+export default function NavItem({ text, href, isActive, onClick }: NavItemProps) {
+  const theme = useTheme()
+  const { h3 } = { ...theme.typography.fontSize }
+  return (
+    <StyledNavItem isActive={isActive} onClick={onClick} fontType={h3}>
+      <Link href={href ?? ''}>{text}</Link>
+    </StyledNavItem>
+  )
+}
+
+NavItem.defaultProps = defaultProps

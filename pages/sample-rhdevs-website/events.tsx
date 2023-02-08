@@ -1,8 +1,9 @@
-import PageSectionComponent from '@/components/PageSection'
-import { InformationMainContainer } from '@/styles/GlobalStyledComponents'
+import PageSectionComponent from '@/components/sample-rhdevs-website/PageSection'
+import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
 import { events } from '@/texts/descriptions/events'
+import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
-export default function Events() {
+function Events() {
   return (
     <InformationMainContainer>
       {events.map((event, index) => (
@@ -18,3 +19,5 @@ export default function Events() {
     </InformationMainContainer>
   )
 }
+
+export default rhdevsWebsiteWrapper(Events)

@@ -1,7 +1,16 @@
-import { useTheme } from 'styled-components'
+import styled, { FontType, useTheme } from 'styled-components'
 import { WarningOutlined } from '@ant-design/icons'
 
-import { Label } from './styles/WarningLabel.styled'
+import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
+
+const Label = styled.span<{ fontType: FontType }>`
+  font-size: 20px;
+  margin-left: 1rem;
+  color: ${(props) => props.theme.palette.primary};
+
+  font-style: normal;
+  ${fontTypeCss}
+`
 
 type Props = {
   label: string

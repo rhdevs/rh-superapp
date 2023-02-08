@@ -6,15 +6,16 @@ import {
   designersDescription,
   uiuxDescription,
 } from '@/texts/descriptions/aboutUs'
-import PageSectionComponent from '@/components/PageSection'
-import { InformationMainContainer } from '@/styles/GlobalStyledComponents'
+import PageSectionComponent from '@/components/sample-rhdevs-website/PageSection'
+import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
+import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
 import frontendLogo from '@/assets/frontend_logo.png'
 import backendLogo from '@/assets/backend_logo.png'
 import designersLogo from '@/assets/designers_logo.png'
 import UIUXLogo from '@/assets/uiux_logo.png'
 
-export default function About() {
+function About() {
   return (
     <InformationMainContainer>
       <PageSectionComponent title="Mission" description={missionDescription} />
@@ -46,3 +47,5 @@ export default function About() {
     </InformationMainContainer>
   )
 }
+
+export default rhdevsWebsiteWrapper(About)

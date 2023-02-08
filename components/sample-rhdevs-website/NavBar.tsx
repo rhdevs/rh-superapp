@@ -1,9 +1,35 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
 import { navTitles } from '@/texts/common/navTitles'
-import { MainContainer, NavBarSpace, NavItemContainer } from './styles/NavBar.styled'
 import NavItem from './NavItem'
+
+export const NAV_BAR_HEIGHT = '4rem'
+
+const MainContainer = styled.div<{ isVisible: boolean }>`
+  width: 100vw;
+  height: ${NAV_BAR_HEIGHT};
+  margin: 0;
+  ${(props) => props.isVisible && 'position: fixed;'}
+  top: ${(props) => (props.isVisible ? 0 : `-${NAV_BAR_HEIGHT}`)};
+  transition: top 0.3s;
+  background-color: ${(props) => `${props.theme.palette.common.black}`};
+`
+
+const NavItemContainer = styled.div`
+  height: ${NAV_BAR_HEIGHT};
+  display: flex;
+  margin-left: 3rem;
+
+  div + div {
+    margin-left: 2rem;
+  }
+`
+
+const NavBarSpace = styled.div<{ isVisible: boolean }>`
+  height: ${(props) => (props.isVisible ? NAV_BAR_HEIGHT : '0')};
+`
 
 function NavBar() {
   const router = useRouter()
@@ -37,7 +63,11 @@ function NavBar() {
                 (item === 'About Us' && pageName === 'about') ||
                 (item === 'Contact Us' && pageName === 'contact')
               }
-              href={item === 'Home' ? '/' : `/${item.toLowerCase().match('^[a-zA-Z-]*')}`}
+              href={
+                item === 'Home'
+                  ? '/sample-rhdevs-website'
+                  : `/sample-rhdevs-website/${item.toLowerCase().match('^[a-zA-Z-]*')}`
+              }
             />
           ))}
         </NavItemContainer>

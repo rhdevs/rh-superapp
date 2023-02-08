@@ -1,6 +1,7 @@
+import React from 'react'
 import styled from 'styled-components'
 
-export const MainContainer = styled.div`
+const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,14 +11,14 @@ export const MainContainer = styled.div`
   width: 100vw;
 `
 
-export const LogoContainer = styled.div`
+const LogoContainer = styled.div`
   margin-top: 2rem;
   width: 400px;
   height: 400px;
   position: relative;
 `
 
-export const LeftArrow = styled.div`
+const LeftArrow = styled.div`
   width: 50px;
   height: 180px;
   top: 0;
@@ -51,7 +52,7 @@ export const LeftArrow = styled.div`
   }
 `
 
-export const RightArrow = styled.div`
+const RightArrow = styled.div`
   width: 50px;
   height: 180px;
   top: 20%;
@@ -84,7 +85,7 @@ export const RightArrow = styled.div`
   }
 `
 
-export const Line = styled.div`
+const Line = styled.div`
   width: 50px;
   height: 360px;
   bottom: 8%;
@@ -111,3 +112,17 @@ export const Line = styled.div`
     }
   }
 `
+
+function RHDevLogo() {
+  return (
+    <MainContainer>
+      <LogoContainer>
+        <LeftArrow />
+        <RightArrow />
+        <Line />
+      </LogoContainer>
+    </MainContainer>
+  )
+}
+
+export default RHDevLogo

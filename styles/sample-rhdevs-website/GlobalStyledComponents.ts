@@ -1,5 +1,5 @@
+import { NAV_BAR_HEIGHT } from '@/components/sample-rhdevs-website/NavBar'
 import styled from 'styled-components'
-import { NAV_BAR_HEIGHT } from '@/components/styles/NavBar.styled'
 
 // Main Containers
 export const MainContainer = styled.div`

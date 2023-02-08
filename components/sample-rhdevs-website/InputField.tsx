@@ -1,14 +1,61 @@
+import styled, { FontType, useTheme } from 'styled-components'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
-import { useTheme } from 'styled-components'
 import WarningLabel from './WarningLabel'
 import { defaultRegex, invalidEmail, invalidName, missingField } from '@/texts/errors/formErrors'
 
-import {
-  InputFieldContainer,
-  InputFieldHeader,
-  InputFieldTitle,
-  TextInput,
-} from './styles/InputField.styled'
+import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
+
+const InputFieldContainer = styled.div`
+  position: relative;
+  height: 120px;
+  width: 100%;
+`
+
+const InputFieldHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 46px;
+  margin: 0;
+`
+
+const InputFieldTitle = styled.div<{ fontType: FontType }>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 46px;
+  margin: 0;
+
+  font-style: normal;
+  ${fontTypeCss}
+
+  color: ${(props) => props.theme.palette.common.white};
+`
+
+const TextInput = styled.input<{ fontType: FontType }>`
+  width: 100%;
+  height: 45px;
+  margin: 0;
+
+  outline: 0;
+  border: 0;
+  border-bottom: 1px solid ${(props) => props.theme.palette.common.gray};
+
+  font-style: normal;
+  ${fontTypeCss}
+
+  color: white;
+  background: transparent;
+
+  transition: border-color 0.2s;
+
+  :focus {
+    border-bottom-color: ${(props) => props.theme.palette.common.white};
+  }
+  :invalid {
+    border-bottom-color: ${(props) => props.theme.palette.primary};
+  }
+`
 
 type Types = 'text' | 'name' | 'email'
 

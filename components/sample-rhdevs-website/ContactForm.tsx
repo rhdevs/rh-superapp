@@ -1,10 +1,25 @@
 import axios from 'axios'
 import { FieldValues, useForm } from 'react-hook-form'
+import styled from 'styled-components'
 import InputField from './InputField'
 import SubmitButton from './SubmitButton'
 import { emailRegex, nameRegex } from '@/texts/errors/formErrors'
 
-import { FormContainer } from './styles/FormContainer.styled'
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 29px;
+  Button {
+    margin: 40px;
+  }
+`
+
+const TextContainer = styled.div`
+  font-size: 24px;
+  margin: 35px 0px;
+  align-self: flex-start;
+`
 
 function ContactForm() {
   const {

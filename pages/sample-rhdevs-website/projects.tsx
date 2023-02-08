@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import ProjectPreview from '@/components/ProjectPreview'
+import ProjectPreview from '@/components/sample-rhdevs-website/ProjectPreview'
 import { facilityBooking, supperCollation, announcementBot } from '@/texts/descriptions/projects'
-import { MainContainer } from '@/styles/GlobalStyledComponents'
+import { MainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
+import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
 import logoBackground from '@/assets/logo_background.png'
 import logo from '@/assets/RHDevs_Logo2.png'
@@ -51,7 +52,7 @@ const ProjectPreviewContainer = styled.div`
   margin: 0 100px 40px 100px;
 `
 
-export default function Projects() {
+function Projects() {
   return (
     <ProjectsMainContainer>
       <ImageContainer>
@@ -82,3 +83,5 @@ export default function Projects() {
     </ProjectsMainContainer>
   )
 }
+
+export default rhdevsWebsiteWrapper(Projects)
