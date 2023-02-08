@@ -1,6 +1,6 @@
 import PageSectionComponent from '@/components/sample-rhdevs-website/PageSection'
 import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
-import { events } from '@/texts/descriptions/events'
+import { events } from '@/texts/sample-rhdevs-website/descriptions/events'
 import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
 function Events() {

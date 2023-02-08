@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { navTitles } from '@/texts/common/navTitles'
+import { navTitles } from '@/texts/sample-rhdevs-website/common/navTitles'
 import NavItem from './NavItem'
 
 export const NAV_BAR_HEIGHT = '4rem'

@@ -5,15 +5,15 @@ import {
   backEndDescription,
   designersDescription,
   uiuxDescription,
-} from '@/texts/descriptions/aboutUs'
+} from '@/texts/sample-rhdevs-website/descriptions/aboutUs'
 import PageSectionComponent from '@/components/sample-rhdevs-website/PageSection'
 import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
 import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
-import frontendLogo from '@/assets/frontend_logo.png'
-import backendLogo from '@/assets/backend_logo.png'
-import designersLogo from '@/assets/designers_logo.png'
-import UIUXLogo from '@/assets/uiux_logo.png'
+import frontendLogo from '@/assets/sample-rhdevs-website/frontend_logo.png'
+import backendLogo from '@/assets/sample-rhdevs-website/backend_logo.png'
+import designersLogo from '@/assets/sample-rhdevs-website/designers_logo.png'
+import UIUXLogo from '@/assets/sample-rhdevs-website/uiux_logo.png'
 
 function About() {
   return (

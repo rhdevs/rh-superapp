@@ -1,6 +1,6 @@
-import RHDevs from '@/assets/RHDevs-Logo-EventsPage.svg'
-import UPGRHADEimg from '@/assets/UPGRHADE-Logo-EventsPage.svg'
-import InterHallimg from '@/assets/InterHall-Logo-EventsPage.svg'
+import RHDevs from '@/assets/sample-rhdevs-website/RHDevs-Logo-EventsPage.svg'
+import UPGRHADEimg from '@/assets/sample-rhdevs-website/UPGRHADE-Logo-EventsPage.svg'
+import InterHallimg from '@/assets/sample-rhdevs-website/InterHall-Logo-EventsPage.svg'
 
 const InterHackathonDesc = (
   <>
@@ -49,7 +49,8 @@ const upgRHadeDesc = (
     Results can be viewed{' '}
     <a
       style={{ color: '#10BCBC' }}
-      href="https://www.instagram.com/p/CFrijU4Hw8H/?utm_medium=share_sheet">
+      href="https://www.instagram.com/p/CFrijU4Hw8H/?utm_medium=share_sheet"
+    >
       here
     </a>
   </>

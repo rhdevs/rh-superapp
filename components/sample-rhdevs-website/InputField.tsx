@@ -1,7 +1,12 @@
 import styled, { FontType, useTheme } from 'styled-components'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 import WarningLabel from './WarningLabel'
-import { defaultRegex, invalidEmail, invalidName, missingField } from '@/texts/errors/formErrors'
+import {
+  defaultRegex,
+  invalidEmail,
+  invalidName,
+  missingField,
+} from '@/texts/sample-rhdevs-website/errors/formErrors'
 
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 

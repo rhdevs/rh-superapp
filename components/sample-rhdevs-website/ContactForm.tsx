@@ -3,7 +3,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import InputField from './InputField'
 import SubmitButton from './SubmitButton'
-import { emailRegex, nameRegex } from '@/texts/errors/formErrors'
+import { emailRegex, nameRegex } from '@/texts/sample-rhdevs-website/errors/formErrors'
 
 const FormContainer = styled.form`
   display: flex;

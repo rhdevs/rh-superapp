@@ -2,14 +2,18 @@ import Image from 'next/image'
 import styled, { FontType, useTheme } from 'styled-components'
 
 import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
-import { contactHeaders, contactMethods, socialMedia } from '@/texts/common/rhdevsInfo'
+import {
+  contactHeaders,
+  contactMethods,
+  socialMedia,
+} from '@/texts/sample-rhdevs-website/common/rhdevsInfo'
 import ContactForm from '@/components/sample-rhdevs-website/ContactForm'
 import ClickToCopySection from '@/components/sample-rhdevs-website/ClickToCopySection'
 
 import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
-import logo from '@/assets/logo.png'
+import logo from '@/assets/sample-rhdevs-website/logo.png'
 
 const MainContainer = styled(InformationMainContainer)`
   width: 100%;

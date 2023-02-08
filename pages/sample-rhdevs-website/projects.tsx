@@ -2,12 +2,16 @@ import Image from 'next/image'
 import styled from 'styled-components'
 
 import ProjectPreview from '@/components/sample-rhdevs-website/ProjectPreview'
-import { facilityBooking, supperCollation, announcementBot } from '@/texts/descriptions/projects'
+import {
+  facilityBooking,
+  supperCollation,
+  announcementBot,
+} from '@/texts/sample-rhdevs-website/descriptions/projects'
 import { MainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
 import rhdevsWebsiteWrapper from './_rhdevsWebsiteWrapper'
 
-import logoBackground from '@/assets/logo_background.png'
-import logo from '@/assets/RHDevs_Logo2.png'
+import logoBackground from '@/assets/sample-rhdevs-website/logo_background.png'
+import logo from '@/assets/sample-rhdevs-website/RHDevs_Logo2.png'
 
 const ProjectsMainContainer = styled(MainContainer)`
   display: grid;
