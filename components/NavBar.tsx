@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { navTitles } from '@/texts/sample-rhdevs-website/common/navTitles'
+import { navTitles } from '@/texts/common/navTitles'
 import NavItem from './NavItem'
 
 export const NAV_BAR_HEIGHT = '4rem'
@@ -57,17 +57,8 @@ function NavBar() {
             <NavItem
               key={index}
               text={item}
-              isActive={
-                item.toLowerCase() === pageName ||
-                (item === 'Home' && pageName === '') ||
-                (item === 'About Us' && pageName === 'about') ||
-                (item === 'Contact Us' && pageName === 'contact')
-              }
-              href={
-                item === 'Home'
-                  ? '/sample-rhdevs-website'
-                  : `/sample-rhdevs-website/${item.toLowerCase().match('^[a-zA-Z-]*')}`
-              }
+              isActive={item.toLowerCase() === pageName || (item === 'Home' && pageName === '')}
+              href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
             />
           ))}
         </NavItemContainer>
