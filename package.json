@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run open-browser && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": " next build && npm run open-browser && next start",
-    "lint": "next lint",
-    "open-browser": "start http://localhost:3000"
+    "lint": "next lint"
   },
   "dependencies": {
     "@next/font": "13.1.6",
