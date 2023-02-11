@@ -60,8 +60,6 @@ const defaultProps = {
   isActive: true,
 }
 
-const lines = defaultProps.content.split('\n')
-
 function EventPopup(props: Props) {
   const [isActive, setIsActive] = useState(true)
   const closePopup = () => {
