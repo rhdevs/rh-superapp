@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { navTitles } from '@/texts/common/navTitles'
 import NavItem from './NavItem'
-
+import EventPopup from './sample-rhdevs-website/EventPopup'
 export const NAV_BAR_HEIGHT = '4rem'
 
 const MainContainer = styled.div<{ isVisible: boolean }>`
