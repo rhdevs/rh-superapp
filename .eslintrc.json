@@ -35,9 +35,11 @@
         "tsx": "never"
       }
     ],
+    "import/order": "off",
     "no-use-before-define": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "off",
     "@typescript-eslint/no-use-before-define": "error",
-    "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -63,4 +65,3 @@
     "security/detect-object-injection": "off"
   }
 }
-

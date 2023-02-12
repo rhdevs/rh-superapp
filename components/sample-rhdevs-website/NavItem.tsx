@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { MouseEventHandler } from 'react'
 import styled, { css, FontType, useTheme } from 'styled-components'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
@@ -55,6 +54,7 @@ type NavItemProps = {
 }
 
 const defaultProps = {
+  href: '',
   isActive: false,
 }
 
