@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react'
+import useSWR from 'swr'
 import { useDebounce } from '@/hooks/useDebounce'
 
 function SearchBar() {
   const [keyword, setKeyword] = useState('')
   const debouncedKeyword = useDebounce(keyword, 5000)
-  const [isSearching, setIsSearching] = useState(false)
+  const { data, error, isLoading, mutate } = useSWR('')
 
   useEffect(() => {
     if (debouncedKeyword) {
-      setIsSearching(true)
     } else {
-      setIsSearching(false)
     }
   }, [debouncedKeyword])
 
