@@ -15,11 +15,11 @@ const FormContainer = styled.form`
   }
 `
 
-const TextContainer = styled.div`
-  font-size: 24px;
-  margin: 35px 0px;
-  align-self: flex-start;
-`
+// const TextContainer = styled.div`
+//   font-size: 24px;
+//   margin: 35px 0px;
+//   align-self: flex-start;
+// `
 
 function ContactForm() {
   const {
@@ -40,9 +40,10 @@ function ContactForm() {
         email: data.Email.trim(),
         message: data.Message.trim(),
       },
-    }).then((response) => {
-      console.log(response)
     })
+    // .then((response) => {
+    //   // console.log(response)
+    // })
   }
 
   return (

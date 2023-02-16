@@ -1,8 +1,9 @@
 import React from 'react'
 import NavBar from '@/components/sample-rhdevs-website/NavBar'
 
-const rhdevsWebsiteWrapper = (WrappedComponent) => {
-  return class extends React.Component {
+/* eslint-disable react/prefer-stateless-function */
+const rhdevsWebsiteWrapper = (WrappedComponent) =>
+  class extends React.Component {
     render() {
       return (
         <div style={{ background: 'black' }}>
@@ -12,6 +13,5 @@ const rhdevsWebsiteWrapper = (WrappedComponent) => {
       )
     }
   }
-}
 
 export default rhdevsWebsiteWrapper
