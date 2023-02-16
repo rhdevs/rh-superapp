@@ -1,15 +1,14 @@
-import React from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
+import image from 'next/image'
 import SignUpButton from './SignUpButton'
+import logo from '@/assets/sample-rhdevs-website/logo.png'
 
 const EventPopupContainer = styled.div`
   position: absolute;
   background-color: white;
   padding: 20px;
-  margin-top: 100px;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin: 100px 20% 0px;
 `
 
 const CloseButton = styled.button`
@@ -24,14 +23,15 @@ const CloseButton = styled.button`
   }
 `
 
-const PopupImage = styled.img`
+const PopupImage = styled(image)`
   display: block;
   border-radius: 10px;
+  height: 70%;
+  width: 70%;
   max-height: 70%;
   max-width: 70%;
   margin: 0 auto;
-  padding-top: 30px;
-  padding-bottom: 50px;
+  padding-top: 30px 0 50px;
 `
 
 const PopupTitle = styled.h1`
@@ -40,27 +40,23 @@ const PopupTitle = styled.h1`
   font-weight: 600;
   color: black;
 `
+
 const PopupContent = styled.p`
   white-space: pre-line;
 `
 
 type Props = {
-  image: any
+  image: string
   title: string
   content: string
   isActive: boolean
 }
 
-const defaultProps = {
-  image:
-    'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-  title: 'Valentines Day Event',
-  content:
-    "Still thinking of what to get your  friends  or that special someone for VALENTINES DAY? RVC SP got you!!! With a wide assortment of gifts from fresh flowers and preserved flowers , there's bound to be something for everyone! As all stocks are limited, fill up the pre order form HERE to get FIRST DIBS on your items! P.S. Due to unforeseen circumstances, our crochet flowers will not be sold anymore but fret not! The other options are still available so faster PREORDER NOWWWWAll profits will be channelled to support the welfare of our beneficiaries so DONT WAIT ANYMORE!!! Show your love to your friends/ boo and do a good deed today!",
-  isActive: true,
-}
-
-const lines = defaultProps.content.split('\n')
+/**
+ *
+ * @returns A popup that displays the event details and sign up button
+ *
+ */
 
 function EventPopup(props: Props) {
   const [isActive, setIsActive] = useState(true)
@@ -73,9 +69,9 @@ function EventPopup(props: Props) {
       {isActive && (
         <EventPopupContainer>
           <CloseButton onClick={closePopup}>x</CloseButton>
-          <PopupImage src={defaultProps.image} alt="Event Image" />
-          <PopupTitle>{defaultProps.title}</PopupTitle>
-          <PopupContent>{defaultProps.content}</PopupContent>
+          <PopupImage src={logo} alt="Event Image" />
+          <PopupTitle>{props.title}</PopupTitle>
+          <PopupContent>{props.content}</PopupContent>
           <SignUpButton />
         </EventPopupContainer>
       )}
