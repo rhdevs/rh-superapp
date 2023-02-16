@@ -2,13 +2,18 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import image from 'next/image'
 import SignUpButton from './SignUpButton'
-import logo from '@/assets/sample-rhdevs-website/logo.png'
 
 const EventPopupContainer = styled.div`
   position: absolute;
   background-color: white;
   padding: 20px;
   margin: 100px 20% 0px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  @media (max-width: 500px) {
+    // left right margin smaller for phone users
+    margin: 100px 10% 0px;
+  }
 `
 
 const CloseButton = styled.button`
@@ -67,7 +72,7 @@ function EventPopup(props: Props) {
       {isActive && (
         <EventPopupContainer>
           <CloseButton onClick={closePopup}>x</CloseButton>
-          <PopupImage src={logo} alt="Event Image" />
+          <PopupImage src={props.image} alt="Event Image" />
           <PopupTitle>{props.title}</PopupTitle>
           <PopupContent>{props.content}</PopupContent>
           <SignUpButton />
