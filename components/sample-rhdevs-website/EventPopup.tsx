@@ -41,9 +41,7 @@ const PopupTitle = styled.h1`
   color: black;
 `
 
-const PopupContent = styled.p`
-  white-space: pre-line;
-`
+const PopupContent = styled.p``
 
 type Props = {
   image: string
