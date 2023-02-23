@@ -108,35 +108,41 @@ export default function NavItem({ text, href, isActive, isDropdown, isInColumn }
     }
   }
 
-  return isDropdown ? (
-    <StyledNavItem
-      href={href ?? ''}
-      isActive={isActive}
-      fontType={h3}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <div>{text}</div>
+  if (isDropdown) {
+    return (
+      <StyledNavItem
+        href={href ?? ''}
+        isActive={isActive}
+        fontType={h3}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <div>{text}</div>
 
-      {dropdown && (
-        <DropdownDiv>
-          {dropdownTitles.map((item, index) => (
-            <NavItem
-              key={index}
-              text={item}
-              isDropdown={item.toLowerCase() === 'about us'}
-              href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-              isInColumn={isInColumn}
-            />
-          ))}
-        </DropdownDiv>
-      )}
-    </StyledNavItem>
-  ) : isInColumn ? (
-    <ColumnNavItemContainer href={href ?? ''} isActive={isActive} fontType={h3}>
-      {text}
-    </ColumnNavItemContainer>
-  ) : (
+        {dropdown && (
+          <DropdownDiv>
+            {dropdownTitles.map((item, index) => (
+              <NavItem
+                key={index}
+                text={item}
+                isDropdown={item.toLowerCase() === 'about us'}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                isInColumn={isInColumn}
+              />
+            ))}
+          </DropdownDiv>
+        )}
+      </StyledNavItem>
+    )
+  }
+  if (isInColumn) {
+    return (
+      <ColumnNavItemContainer href={href ?? ''} isActive={isActive} fontType={h3}>
+        {text}
+      </ColumnNavItemContainer>
+    )
+  }
+  return (
     <StyledNavItem href={href ?? ''} isActive={isActive} fontType={h3}>
       {text}
     </StyledNavItem>
