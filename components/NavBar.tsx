@@ -18,9 +18,11 @@ const MainContainer = styled.div<{ isVisible: boolean }>`
 `
 
 const NavItemContainer = styled.div`
-  height: ${NAV_BAR_HEIGHT};
+  height: auto;
   display: flex;
+  align-items: flex-start;
   margin-left: 3rem;
+  margin-top: 1.5rem;
 
   a + a {
     margin-left: 2rem;
@@ -35,6 +37,7 @@ function NavBar() {
   const router = useRouter()
   const pageFilePath = router.pathname
   const pageName = pageFilePath.slice(1)
+
   const [prevScrollPos, setPrevScrollPos] = useState(0)
   const [isVisible, setVisible] = useState(true)
 
@@ -58,6 +61,7 @@ function NavBar() {
               key={index}
               text={item}
               isActive={item.toLowerCase() === pageName || (item === 'Home' && pageName === '')}
+              isDropdown={item.toLowerCase() === 'about us'}
               href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
             />
           ))}
