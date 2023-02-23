@@ -84,14 +84,14 @@ type NavItemProps = {
 const defaultProps = {
   href: '',
   isActive: false,
+  isDropdown: false,
+  isInColumn: false,
 }
 
 export default function NavItem({ text, href, isActive, isDropdown, isInColumn }: NavItemProps) {
   const theme = useTheme()
-  const [click, setClick] = useState(false)
   const [dropdown, setDropdown] = useState(false)
   const { h3 } = { ...theme.typography.fontSize }
-  const handleClick = () => setClick(!click)
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
       setDropdown(false)
