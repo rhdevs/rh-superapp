@@ -29,7 +29,7 @@ const DropdownDiv = styled.div`
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 100px;
+  width: 90px;
   background-position: 50% calc(50% + 12px);
   background-color: black;
   justify-content: center;
