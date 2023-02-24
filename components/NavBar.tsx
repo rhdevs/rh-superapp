@@ -58,7 +58,7 @@ function NavBar() {
               key={index}
               text={item}
               isActive={item.toLowerCase() === pageName || (item === 'Home' && pageName === '')}
-              href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+              href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/ /g, '')}`}
             />
           ))}
         </NavItemContainer>

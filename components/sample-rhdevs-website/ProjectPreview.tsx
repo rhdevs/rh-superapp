@@ -27,8 +27,8 @@ const PreviewText = styled.div<{ hasAnimation?: boolean; fontType: FontType }>`
 
 const PreviewTitle = styled.label<{ fontType: FontType }>`
   ${fontTypeCss}
-  color: ${(props) => props.theme.palette.common.white};
-  background-color: ${(props) => props.theme.palette.common.black};
+  color: ${(props) => props.theme.palette.common.black};
+  background-color: ${(props) => props.theme.palette.common.white};
   transition: background-image 0.4s ease-in-out;
   width: fit-content;
   &:hover {
@@ -39,7 +39,7 @@ const PreviewTitle = styled.label<{ fontType: FontType }>`
 const PreviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.palette.common.black};
+  background-color: ${(props) => props.theme.palette.common.white};
   cursor: default;
   flex: 1 1 100%;
   margin: 0 0 3% 0;
