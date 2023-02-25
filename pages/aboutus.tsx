@@ -1,7 +1,17 @@
+/**
+ * # Create About Us Page
+ *
+ * Path: `/aboutus`
+ *
+ * ## Page Description
+ * This page is accessed after the user has clicked on the About Us button on the navigation bar.
+ *
+ */
+
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import ProjectPreview from '@/components/sample-rhdevs-website/ProjectPreview'
+import Preview from '@/components/AboutUsPreview'
 import FollowUs from '@/components/FollowUs'
 import {
   facilityBooking,
@@ -13,7 +23,7 @@ import { MainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledCompon
 import logoBackground from '@/assets/sample-rhdevs-website/logo_background.png'
 import logo from '@/assets/sample-rhdevs-website/RHDevs_Logo2.png'
 
-const ProjectsMainContainer = styled(MainContainer)`
+const AboutUsMainContainer = styled(MainContainer)`
   display: grid;
   grid-template-rows: 1fr max-content;
   grid-template-columns: 1fr;
@@ -38,27 +48,18 @@ const StyledImage = styled(Image)`
   height: 20%;
   width: 15%;
 `
-const RightArrow = styled.div`
+const Arrow = styled.div<{ isRight: boolean }>`
   border: solid ${(props) => props.theme.palette.common.white};
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
+  transform: rotate(${(props) => (props.isRight ? -45 : 135)}deg);
+  -webkit-transform: rotate(${(props) => (props.isRight ? -45 : 135)}deg);
   position: absolute;
-  right: 16px;
+  left: ${(props) => (props.isRight ? 'auto' : 16)}px;
+  right: ${(props) => (props.isRight ? 16 : 'auto')}px;
 `
 
-const LeftArrow = styled.div`
-  border: solid ${(props) => props.theme.palette.common.white};
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-  position: absolute;
-  left: 16px;
-`
 const PageDotsContainer = styled.div`
   position: absolute;
   bottom: 16px;
@@ -83,7 +84,7 @@ const Divider = styled.hr`
   border: 1.4px solid ${(props) => props.theme.palette.common.gray};
 `
 
-const ProjectPreviewContainer = styled.div`
+const PreviewContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -93,18 +94,19 @@ const ProjectPreviewContainer = styled.div`
 
 function Projects() {
   return (
-    <ProjectsMainContainer>
+    <AboutUsMainContainer>
       <ImageContainer>
-        <LeftArrow></LeftArrow>
-        <RightArrow></RightArrow>
+        <Arrow isRight={false}></Arrow>
+        <Arrow isRight={true}></Arrow>
+
         <PageDotsContainer>
           <PageDots></PageDots>
           <PageDots></PageDots>
         </PageDotsContainer>
       </ImageContainer>
 
-      <ProjectPreviewContainer>
-        <ProjectPreview
+      <PreviewContainer>
+        <Preview
           title={facilityBooking.projectTitle}
           text={facilityBooking.projectDescription}
           hasAnimation
@@ -112,7 +114,7 @@ function Projects() {
         <DividerContainer>
           <Divider />
         </DividerContainer>
-        <ProjectPreview
+        <Preview
           title={supperCollation.projectTitle}
           text={supperCollation.projectDescription}
           hasAnimation
@@ -120,14 +122,14 @@ function Projects() {
         <DividerContainer>
           <Divider />
         </DividerContainer>
-        <ProjectPreview
+        <Preview
           title={announcementBot.projectTitle}
           text={announcementBot.projectDescription}
           hasAnimation
         />
-      </ProjectPreviewContainer>
+      </PreviewContainer>
       <FollowUs></FollowUs>
-    </ProjectsMainContainer>
+    </AboutUsMainContainer>
   )
 }
 
