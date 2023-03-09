@@ -1,15 +1,18 @@
 {
   "name": "rh-superapp",
   "version": "0.1.0",
+{
+  "name": "rh-superapp",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run open-browser && next dev",
+    "dev": "next lint && next dev",
     "build": "next build",
-    "start": " next build && npm run open-browser && next start",
-    "lint": "next lint",
-    "open-browser": "open http://localhost:3000"
+    "start": "next build && npm run open-browser && next start",
+    "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@next/font": "13.1.6",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
@@ -17,6 +20,7 @@
     "antd": "^5.1.7",
     "axios": "^1.2.6",
     "eslint": "8.33.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.1.6",
     "next": "13.1.6",
     "react": "18.2.0",
@@ -27,6 +31,45 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/styled-components": "^5.1.26"
+  }
+}  "private": true,
+  "scripts": {
+    "dev": "next lint && next dev",
+    "build": "next build",
+<<<<<<< HEAD
+    "start": " next build && npm run open-browser && next start",
+    "lint": "next lint",
+    "open-browser": "open http://localhost:3000"
+=======
+    "start": "next build && npm run open-browser && next start",
+    "lint": "next lint"
+>>>>>>> main
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@next/font": "13.1.6",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "antd": "^5.1.7",
+    "axios": "^1.2.6",
+    "eslint": "8.33.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "13.1.6",
+    "next": "13.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.0",
+    "sharp": "^0.31.3",
+    "styled-components": "^5.3.6",
+    "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26"
   }
 }
