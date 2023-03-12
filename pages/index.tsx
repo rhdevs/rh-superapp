@@ -1,4 +1,4 @@
-import { Events, ParallaxHero } from "@/components/LandingItems";
+import { Events, ParallaxHero } from '@/components/LandingItems'
 
 export default function Home() {
   return (

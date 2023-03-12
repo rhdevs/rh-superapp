@@ -1,15 +1,8 @@
-import { dummyData, Event } from "@/texts/common/dummy"
-import Image from "next/image"
-import { ChangeEvent, createContext, useContext, useEffect, useState } from "react"
-import styled from "styled-components"
-
-const LandingHeroDiv = styled.div`
-    width: 100%;    
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+import Image from 'next/image'
+import { ChangeEvent, createContext, useContext, useState } from 'react'
+import styled from 'styled-components'
+import { ParallaxBanner } from 'react-scroll-parallax'
+import { Event, dummyData } from '@/texts/common/dummy'
 
 const EventsWrapper = styled.div`
     display: flex
@@ -20,119 +13,170 @@ const EventsWrapper = styled.div`
 `
 
 const EventHeader = styled.h1`
-    font-size: 38px;
-    text-align: center;
+  font-size: 38px;
+  text-align: center;
 `
 
 const SearchBarWrapper = styled.div`
-    padding: 30px;
-    margin: 0 auto;
+  padding: 30px;
+  margin: 0 auto;
+
+  input {
+    min-width: 250px;
+  }
 `
 
 const SearchBar = styled.input`
-    width: 100%;
-    padding: 8px;
+  width: 100%;
+  padding: 8px;
 `
 
-const EventItem = styled.button`
-    width: 100%;
-    height: 400px;
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    border: 0;
-    cursor: pointer;
+const EventContainer = styled.button`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  cursor: pointer;
+  background-color: white;
+  border: 0;
+`
+
+const EventItem = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 10px 0;
+
+  @media only screen and (max-width: 1024px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 `
 
 const EventDetails = styled.div`
-    width: 100%;
-    display: flex
-    flex-direction: row;
-    padding: 80px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 10px 30px;
+  line-height: 1.75em;
+  align-items: top;
+
+  @media only screen and (max-width: 1024px) {
+    padding: 10px;
+  }
 `
 
-export const ParallaxHero = () => {
-    return (
-        <LandingHeroDiv>insert parallax here</LandingHeroDiv>
-    )
-}
-
 interface EventContextInterface {
-    searchString: string;
-    setSearchString: (s: string) => void;
+    searchString: string
+    setSearchString: (s: string) => void
+  }
+  
+  const defaultEventContext: EventContextInterface = {
+    searchString: '',
+    setSearchString: () => {},
+  }
+  
+  const EventContext = createContext<EventContextInterface>(defaultEventContext)
+  
+/**
+ * Creates the parallax banner through react-scroll-parallax
+ * @returns <ParallaxBanner> component
+ */
+export const ParallaxHero = () => {
+  return (
+    <ParallaxBanner
+      layers={[{ image: 'https://picsum.photos/2560/1440', speed: -30 }]}
+      style={{ aspectRatio: '2 / 1' }}
+    />
+  )
 }
 
-const defaultEventContext: EventContextInterface = {
-    searchString: "",
-    setSearchString: () => { },
-}
-
-const EventContext = createContext<EventContextInterface>(defaultEventContext);
-
+/**
+ * A search bar with context
+ * @returns A div with a search bar
+ */
 const EventSearch = () => {
-    const { setSearchString } = useContext(EventContext);
+  const { setSearchString } = useContext(EventContext)
 
-    return (
-        <SearchBarWrapper>
-            <SearchBar placeholder="Search" onChange={
-                (e: ChangeEvent<HTMLInputElement>) => {
-                    setSearchString(e.target.value);
-                }
-            } />
-        </SearchBarWrapper>
-    )
+  return (
+    <SearchBarWrapper>
+      <SearchBar
+        placeholder="Search"
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setSearchString(e.target.value)
+        }}
+      />
+    </SearchBarWrapper>
+  )
 }
 
+/**
+ * Takes in a url for the image to be the thumbnail for the event listing
+ * @param props imageUrl (string) 
+ * @returns Image for thumbnail
+ */
 const EventThumbnail = (props: { imageUrl: string }) => {
-    return (
-        <Image src={props.imageUrl} width={300} height={300} alt={""} />
-    )
+  return (
+    <Image
+      src={props.imageUrl}
+      width={300}
+      height={300}
+      alt={''}
+      style={{ flexGrow: 1, maxWidth: 300 }}
+    />
+  )
 }
 
+/**
+ * Iterates through all the event data to display all the events
+ * @returns div with all the event listings
+ */
 const EventList = () => {
+  if (dummyData.length === 0) {
+    return <div></div>
+  }
 
-    if (dummyData.length === 0) {
+  return (
+    <EventContainer>
+      {dummyData.map((item: Event) => {
         return (
-            <div></div>
+          <EventItem
+            id={item.id.toString()}
+            onClick={() => {
+              alert('put modal here pls')
+            }}
+          >
+            <EventThumbnail imageUrl={'https://picsum.photos/300'} />
+            <EventDetails>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+            </EventDetails>
+          </EventItem>
         )
-    };
-
-    return (
-        <>
-            {
-                dummyData.map((item: Event) => {
-                    return (
-                        <EventItem id={item.id.toString()} onClick={() => { alert("put modal here pls") }}>
-                            <EventThumbnail imageUrl={"https://picsum.photos/300"} />
-                            <EventDetails>
-                                <h3>{item.name}</h3>
-                                <p>
-                                    {item.description}
-                                </p>
-                            </EventDetails>
-                        </EventItem>
-                    )
-                })
-            }
-        </>
-    )
+      })}
+    </EventContainer>
+  )
 }
 
+/**
+ * Wrapper for the event header, search bar and listing
+ * @returns div with all event related content with context
+ */
 export const Events = () => {
-    const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('')
 
-    return (
-        <EventContext.Provider
-            value={{
-                searchString: search,
-                setSearchString: setSearch,
-            }}
-        >
-            <EventsWrapper>
-                <EventHeader>Upcoming Events</EventHeader>
-                <EventSearch />
-                <EventList />
-            </EventsWrapper >
-        </EventContext.Provider>
-    )
+  return (
+    <EventContext.Provider
+      value={{
+        searchString: search,
+        setSearchString: setSearch,
+      }}
+    >
+      <EventsWrapper>
+        <EventHeader>Upcoming Events</EventHeader>
+        <EventSearch />
+        <EventList />
+      </EventsWrapper>
+    </EventContext.Provider>
+  )
 }
