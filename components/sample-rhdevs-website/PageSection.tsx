@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image'
 import styled, { keyframes, FontType, useTheme } from 'styled-components'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
-import imgPlaceholder from '/assets/sample-rhdevs-website/noimg.png'
+import imgPlaceholder from '@/assets/sample-rhdevs-website/noimg.png'
 
 const fadeInUp = keyframes`
     from {
