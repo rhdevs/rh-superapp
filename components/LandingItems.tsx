@@ -5,11 +5,11 @@ import { ParallaxBanner } from 'react-scroll-parallax'
 import { Event, dummyData } from '@/texts/common/dummy'
 
 const EventsWrapper = styled.div`
-    display: flex
-    flex-direction: row;
-    width: 100%;
-    min-height: 80vh;
-    padding: 80px 140px;
+  display: flex
+  flex-direction: row;
+  width: 100%;
+  min-height: 80vh;
+  padding: 80px 140px;
 `
 
 const EventHeader = styled.h1`
@@ -67,29 +67,27 @@ const EventDetails = styled.div`
 `
 
 interface EventContextInterface {
-    searchString: string
-    setSearchString: (s: string) => void
-  }
-  
-  const defaultEventContext: EventContextInterface = {
-    searchString: '',
-    setSearchString: () => {},
-  }
-  
-  const EventContext = createContext<EventContextInterface>(defaultEventContext)
-  
+  searchString: string
+  setSearchString: (s: string) => void
+}
+
+const defaultEventContext: EventContextInterface = {
+  searchString: '',
+  setSearchString: () => {},
+}
+
+const EventContext = createContext<EventContextInterface>(defaultEventContext)
+
 /**
  * Creates the parallax banner through react-scroll-parallax
  * @returns <ParallaxBanner> component
  */
-export const ParallaxHero = () => {
-  return (
-    <ParallaxBanner
-      layers={[{ image: 'https://picsum.photos/2560/1440', speed: -30 }]}
-      style={{ aspectRatio: '2 / 1' }}
-    />
-  )
-}
+export const ParallaxHero = () => (
+  <ParallaxBanner
+    layers={[{ image: 'https://picsum.photos/2560/1440', speed: -30 }]}
+    style={{ aspectRatio: '2 / 1' }}
+  />
+)
 
 /**
  * A search bar with context
@@ -112,20 +110,18 @@ const EventSearch = () => {
 
 /**
  * Takes in a url for the image to be the thumbnail for the event listing
- * @param props imageUrl (string) 
+ * @param props imageUrl (string)
  * @returns Image for thumbnail
  */
-const EventThumbnail = (props: { imageUrl: string }) => {
-  return (
-    <Image
-      src={props.imageUrl}
-      width={300}
-      height={300}
-      alt={''}
-      style={{ flexGrow: 1, maxWidth: 300 }}
-    />
-  )
-}
+const EventThumbnail = (props: { imageUrl: string }) => (
+  <Image
+    src={props.imageUrl}
+    width={300}
+    height={300}
+    alt=""
+    style={{ flexGrow: 1, maxWidth: 300 }}
+  />
+)
 
 /**
  * Iterates through all the event data to display all the events
@@ -133,27 +129,25 @@ const EventThumbnail = (props: { imageUrl: string }) => {
  */
 const EventList = () => {
   if (dummyData.length === 0) {
-    return <div></div>
+    return <div />
   }
 
   return (
     <EventContainer>
-      {dummyData.map((item: Event) => {
-        return (
-          <EventItem
-            id={item.id.toString()}
-            onClick={() => {
-              alert('put modal here pls')
-            }}
-          >
-            <EventThumbnail imageUrl={'https://picsum.photos/300'} />
-            <EventDetails>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-            </EventDetails>
-          </EventItem>
-        )
-      })}
+      {dummyData.map((item: Event) => (
+        <EventItem
+          id={item.id.toString()}
+          onClick={() => {
+            alert('put modal here pls')
+          }}
+        >
+          <EventThumbnail imageUrl="https://picsum.photos/300" />
+          <EventDetails>
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+          </EventDetails>
+        </EventItem>
+      ))}
     </EventContainer>
   )
 }
