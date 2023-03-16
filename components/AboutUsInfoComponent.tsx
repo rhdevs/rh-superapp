@@ -11,10 +11,10 @@ const fadeIn = keyframes`
   }
 `
 
-const PreviewText = styled.div<{ hasAnimation?: boolean; fontType: FontType }>`
+const InfoComponentText = styled.div<{ hasAnimation?: boolean; fontType: FontType }>`
   ${fontTypeCss}
   margin-top: 20px;
-  color: ${(props) => props.theme.palette.common.gray};
+  color: ${(props) => props.theme.palette.common.black};
   ${(props) =>
     props.hasAnimation &&
     css`
@@ -25,7 +25,7 @@ const PreviewText = styled.div<{ hasAnimation?: boolean; fontType: FontType }>`
     `}
 `
 
-const PreviewTitle = styled.label<{ fontType: FontType }>`
+const InfoComponentTitle = styled.label<{ fontType: FontType }>`
   ${fontTypeCss}
   color: ${(props) => props.theme.palette.common.black};
   background-color: ${(props) => props.theme.palette.common.white};
@@ -36,7 +36,7 @@ const PreviewTitle = styled.label<{ fontType: FontType }>`
   }
 `
 
-const PreviewWrapper = styled.div`
+const InfoComponentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.palette.common.white};
@@ -57,17 +57,19 @@ const defaultProps = {
   onClick: undefined,
 }
 
-export default function ProjectPreview(props: Props) {
+const InfoComponent = (props: Props) => {
   const theme = useTheme()
   const { h4, previewTitle } = { ...theme.typography.fontSize }
   return (
-    <PreviewWrapper onClick={props.onClick}>
-      <PreviewTitle fontType={previewTitle}>{props.title}</PreviewTitle>
-      <PreviewText fontType={h4} hasAnimation={props.hasAnimation}>
+    <InfoComponentWrapper onClick={props.onClick}>
+      <InfoComponentTitle fontType={previewTitle}>{props.title}</InfoComponentTitle>
+      <InfoComponentText fontType={h4} hasAnimation={props.hasAnimation}>
         {props.text}
-      </PreviewText>
-    </PreviewWrapper>
+      </InfoComponentText>
+    </InfoComponentWrapper>
   )
 }
 
-ProjectPreview.defaultProps = defaultProps
+InfoComponent.defaultProps = defaultProps
+
+export default InfoComponent

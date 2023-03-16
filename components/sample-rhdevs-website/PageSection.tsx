@@ -28,11 +28,9 @@ export const MainContainer = styled.div<{
   grid-template-columns: ${(props) => props.imgPosition && 'auto'} auto;
   grid-template-areas: '${(props) => props.imgPosition === 'left' && 'image'} text ${(props) =>
     props.imgPosition === 'right' && 'image'}';
-
   @media screen and (min-width: 700px) {
     gap: 5rem;
   }
-
   @media screen and (max-width: 700px) {
     display: flex;
     flex-direction: ${(props) => (props.responsiveReverse ? 'column-reverse' : 'column')};
@@ -48,7 +46,6 @@ export const ImageContainer = styled(Image)`
   max-height: 350px;
   max-width: 350px;
   grid-area: image;
-
   @media screen and (max-width: 700px) {
     margin: 0 0 40px 0;
     width: 80%;
