@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const FollowUsContainer = styled.div`
+const SocialMediaLinksContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -18,13 +18,13 @@ const StyledText = styled.text`
   color: ${(props) => props.theme.palette.common.black};
 `
 
-export default function FollowUs() {
-  return (
-    <FollowUsContainer>
-      <StyledText>Follow Us</StyledText>
-      <Icon />
-      <Icon />
-      <Icon />
-    </FollowUsContainer>
-  )
-}
+const SocialMediaLinks = () => (
+  <SocialMediaLinksContainer>
+    <StyledText>Follow Us</StyledText>
+    <Icon />
+    <Icon />
+    <Icon />
+  </SocialMediaLinksContainer>
+)
+
+export default SocialMediaLinks

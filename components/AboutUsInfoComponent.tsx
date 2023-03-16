@@ -57,7 +57,7 @@ const defaultProps = {
   onClick: undefined,
 }
 
-export default function InfoComponent(props: Props) {
+const InfoComponent = (props: Props) => {
   const theme = useTheme()
   const { h4, previewTitle } = { ...theme.typography.fontSize }
   return (
@@ -71,3 +71,5 @@ export default function InfoComponent(props: Props) {
 }
 
 InfoComponent.defaultProps = defaultProps
+
+export default InfoComponent

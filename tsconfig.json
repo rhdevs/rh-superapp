@@ -20,7 +20,7 @@
     },
     "noImplicitAny": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/AboutUsInfoComponenttsx"],
   "exclude": ["node_modules"]
 }
 
