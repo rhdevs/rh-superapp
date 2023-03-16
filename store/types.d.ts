@@ -1,13 +1,9 @@
-import { Action } from 'redux'
-import { rootReducer } from './store'
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux'
+import type { ThunkAction, AnyAction } from '@reduxjs/toolkit'
 
-export type RootState = ReturnType<typeof rootReducer>
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
-type ThunkDispatch<S, A extends Action> = {
-  (action: A): A
-  <R>(asyncAction: ThunkAction<R, S, A>): R
-}
-type ThunkAction<R, S, A extends Action> = (dispatch: ThunkDispatch<S, A>, getState: () => S) => R
-
-export type Dispatch<CustomActionTypes extends Action> = ThunkDispatch<RootState, CustomActionTypes>
-export type GetState = () => RootState
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, AnyAction>
