@@ -22,9 +22,9 @@ export default function FollowUs() {
   return (
     <FollowUsContainer>
       <StyledText>Follow Us</StyledText>
-      <Icon></Icon>
-      <Icon></Icon>
-      <Icon></Icon>
+      <Icon />
+      <Icon />
+      <Icon />
     </FollowUsContainer>
   )
 }
