@@ -66,6 +66,11 @@ const EventDetails = styled.div`
   }
 `
 
+const StyledEventThumbnail = styled(Image)`
+  flex-grow: 1;
+  max-width: 300px;
+`
+
 interface EventContextInterface {
   searchString: string
   setSearchString: (s: string) => void
@@ -114,13 +119,7 @@ const EventSearch = () => {
  * @returns Image for thumbnail
  */
 const EventThumbnail = (props: { imageUrl: string }) => (
-  <Image
-    src={props.imageUrl}
-    width={300}
-    height={300}
-    alt=""
-    style={{ flexGrow: 1, maxWidth: 300 }}
-  />
+  <StyledEventThumbnail src={props.imageUrl} width={300} height={300} alt="" />
 )
 
 /**
@@ -162,6 +161,7 @@ export const Events = () => {
   return (
     <EventContext.Provider
       value={{
+        // TODO consider wrapping it in a useMemo hook to prevent unnecessary re-renders
         searchString: search,
         setSearchString: setSearch,
       }}

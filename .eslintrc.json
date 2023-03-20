@@ -62,6 +62,8 @@
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "import/no-unresolved": "off",
-    "security/detect-object-injection": "off"
+    "security/detect-object-injection": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-constructed-context-values": "warn"
   }
 }
