@@ -51,3 +51,5 @@ export const animalTherapy: Event = {
   tags: 'general',
   cca: 'Raffles Volunteer Corps',
 }
+
+export const dummyData:Event[] = [valentinesFundraiser, animalTherapy];
