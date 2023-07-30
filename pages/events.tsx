@@ -1,64 +1,101 @@
+/* eslint-disable */
 import PageSectionComponent from '@/components/sample-rhdevs-website/PageSection'
 import { InformationMainContainer } from '@/styles/sample-rhdevs-website/GlobalStyledComponents'
 import { events } from '@/texts/sample-rhdevs-website/descriptions/events'
-import React from 'react'
-import { DownOutlined, SmileOutlined } from '@ant-design/icons'
+import React, { useEffect, useState } from 'react'
+import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { Dropdown, Space } from 'antd'
+import { Dropdown, message, Space } from 'antd'
 
 const items: MenuProps['items'] = [
   {
+    label: 'Title',
+    key: '0',
+  },
+  {
+    label: 'Start Time',
     key: '1',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="">
-        Start Time
-      </a>
-    ),
   },
   {
+    label: 'End Time',
     key: '2',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="">
-        End Time
-      </a>
-    ),
   },
   {
+    label: 'Type of Event',
     key: '3',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="">
-        Type of Event
-      </a>
-    ),
   },
   {
+    label: 'CCA',
     key: '4',
-    label: (
-      <a target="_blank" rel="noopener noreferrer" href="">
-        CCA
-      </a>
-    ),
-  },
-  {
-    key: '69',
-    danger: true,
-    label: 'a danger item',
-    icon: <SmileOutlined />,
   },
 ]
 
+const types = {
+  '0': 'title',
+  '1': 'startTime',
+  '2': 'endTime',
+  '3': 'type',
+  '4': 'cca',
+}
+
 export default function Events() {
+  const [eventsArr, setEventsArr] = useState(events)
+  const [sortType, setSortType] = useState('0')
+
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    setSortType(key)
+    //message.info(`Sorted by ${items?[parseInt(key) - 1].label}`)
+  }
+
+  const sortEvents = (key) => {
+    const sortProperty = types[key]
+    const sorted = [...eventsArr].sort((a, b) => {
+      if (typeof a[sortProperty] === 'string') {
+        let x = a[sortProperty].toLowerCase()
+        let y = b[sortProperty].toLowerCase()
+        if (x < y) {
+          return -1
+        }
+        if (x > y) {
+          return 1
+        }
+        return 0
+      } else if (a[sortProperty] instanceof Date) {
+        let x = a[sortProperty]
+        let y = b[sortProperty]
+        if (x < y) {
+          return -1
+        }
+        if (x > y) {
+          return 1
+        }
+        return 0
+      } else {
+        return a[sortProperty] - b[sortProperty]
+      }
+    })
+    console.log(sorted)
+    setEventsArr(sorted)
+  }
+
+  useEffect(() => {
+    sortEvents(sortType)
+    //console.log(eventsArr)
+  }, [sortType])
+
   return (
     <InformationMainContainer>
-      <Dropdown menu={{ items }}>
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            Hover me
-            <DownOutlined />
-          </Space>
-        </a>
-      </Dropdown>
-      {events.map((event, index) => (
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              Sort by
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
+      </div>
+      {eventsArr.map((event, index) => (
         <PageSectionComponent
           key={index}
           title={event.title}
