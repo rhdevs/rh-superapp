@@ -5,7 +5,7 @@ import { events } from '@/texts/sample-rhdevs-website/descriptions/events'
 import React, { useEffect, useState } from 'react'
 import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import { Dropdown, message, Space } from 'antd'
+import { Dropdown, Space } from 'antd'
 
 const items: MenuProps['items'] = [
   {
@@ -28,6 +28,10 @@ const items: MenuProps['items'] = [
     label: 'CCA',
     key: '4',
   },
+  {
+    label: 'Tags',
+    key: '5',
+  },
 ]
 
 const types = {
@@ -36,6 +40,7 @@ const types = {
   '2': 'endTime',
   '3': 'type',
   '4': 'cca',
+  '5': 'tags',
 }
 
 export default function Events() {
@@ -44,15 +49,14 @@ export default function Events() {
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
     setSortType(key)
-    //message.info(`Sorted by ${items?[parseInt(key) - 1].label}`)
   }
 
   const sortEvents = (key) => {
     const sortProperty = types[key]
     const sorted = [...eventsArr].sort((a, b) => {
       if (typeof a[sortProperty] === 'string') {
-        let x = a[sortProperty].toLowerCase()
-        let y = b[sortProperty].toLowerCase()
+        const x = a[sortProperty].toLowerCase()
+        const y = b[sortProperty].toLowerCase()
         if (x < y) {
           return -1
         }
@@ -61,8 +65,8 @@ export default function Events() {
         }
         return 0
       } else if (a[sortProperty] instanceof Date) {
-        let x = a[sortProperty]
-        let y = b[sortProperty]
+        const x = a[sortProperty]
+        const y = b[sortProperty]
         if (x < y) {
           return -1
         }
@@ -74,13 +78,11 @@ export default function Events() {
         return a[sortProperty] - b[sortProperty]
       }
     })
-    console.log(sorted)
     setEventsArr(sorted)
   }
 
   useEffect(() => {
     sortEvents(sortType)
-    //console.log(eventsArr)
   }, [sortType])
 
   return (
