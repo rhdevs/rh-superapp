@@ -12,6 +12,7 @@ const SAMPLE_IMAGE = 'https://wallpaperaccess.com/full/22501.png'
 
 const YearbookPageContainer = styled.div`
   margin: 40px 20px 20px 20px;
+  background-cover: url('/assets/bg.jpg');
 `
 
 const CardsRowContainer = styled.div`
@@ -21,8 +22,7 @@ const CardsRowContainer = styled.div`
 export default function Yearbook() {
   return (
     <YearbookPageContainer>
-      <h1>Archive</h1>
-      <h2>2023</h2>
+      <img src="/assets/yearbook.png" alt="Yearbook Title" />
       <CardsRowContainer>
         <Row>
           {MONTHS.map((monthStr: string) => (
