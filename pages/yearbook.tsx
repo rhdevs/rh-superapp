@@ -26,7 +26,12 @@ export default function Yearbook() {
       <CardsRowContainer>
         <Row>
           {MONTHS.map((monthStr: string) => (
-            <MonthCard monthDisplayAbbreviation={monthStr} imageUrl={SAMPLE_IMAGE} key={monthStr} />
+            <MonthCard
+              monthDisplayAbbreviation={monthStr}
+              imageUrl={SAMPLE_IMAGE}
+              pageUrl="https://www.google.com"
+              key={monthStr}
+            />
           ))}
         </Row>
       </CardsRowContainer>

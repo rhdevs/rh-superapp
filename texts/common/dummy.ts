@@ -1,5 +1,7 @@
 // use these values for testing purposes
 
+import { StaticImageData } from 'next/image'
+
 export type Event = {
   id: number
   startTime: Date
@@ -10,6 +12,7 @@ export type Event = {
   tags: 'sports' | 'culture' | 'committee' | 'general'
   signUpLink?: string
   cca: string // TODO: replace with CCA type
+  image: StaticImageData
 }
 
 export const valentinesFundraiser: Event = {
@@ -32,6 +35,11 @@ export const valentinesFundraiser: Event = {
   tags: 'culture',
   signUpLink: 'https://google.com',
   cca: 'Raffles Volunteer Corps',
+  image: {
+    src: '/assets/sample-rhdevs-website/backend_logo.png',
+    width: 300,
+    height: 300,
+  },
 }
 
 export const animalTherapy: Event = {
@@ -50,6 +58,11 @@ export const animalTherapy: Event = {
   type: 'event',
   tags: 'general',
   cca: 'Raffles Volunteer Corps',
+  image: {
+    src: '/assets/sample-rhdevs-website/frontend_logo.png',
+    width: 300,
+    height: 300,
+  },
 }
 
-export const dummyData:Event[] = [valentinesFundraiser, animalTherapy];
+export const dummyData: Event[] = [valentinesFundraiser, animalTherapy]
