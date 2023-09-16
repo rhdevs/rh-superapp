@@ -7,7 +7,6 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:react/recommended",
-    "airbnb",
     "plugin:security/recommended",
     "plugin:import/typescript",
     "prettier"
@@ -25,7 +24,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "@typescript-eslint", "security", "unused-imports", "prettier"],
+  "plugins": ["unused-imports", "react", "@typescript-eslint", "security", "prettier"],
   "rules": {
     "import/extensions": [
       "error",

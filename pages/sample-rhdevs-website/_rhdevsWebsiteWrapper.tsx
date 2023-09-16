@@ -3,6 +3,7 @@ import NavBar from '@/components/sample-rhdevs-website/NavBar'
 
 /* eslint-disable react/prefer-stateless-function */
 const rhdevsWebsiteWrapper = (WrappedComponent) =>
+  // eslint-disable-next-line react/display-name
   class extends React.Component {
     render() {
       return (

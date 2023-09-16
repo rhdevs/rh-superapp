@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image'
 import styled, { keyframes, FontType, useTheme } from 'styled-components'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
 
-import imgPlaceholder from '@/assets/sample-rhdevs-website/noimg.png'
+import imgPlaceholder from '@/public/assets/noimg.png'
 
 const fadeInUp = keyframes`
     from {
@@ -43,7 +43,7 @@ export const MainContainer = styled.div<{
   }
 `
 
-export const ImageContainer = styled(Image)`
+export const ImageContainer = styled.div`
   object-fit: contain;
   max-height: 350px;
   max-width: 350px;
@@ -63,15 +63,14 @@ export const TextContainer = styled.div`
   gap: 1rem;
 `
 
-export const Title = styled.h2<{ events?: boolean; fontType: FontType }>`
-  color: ${(props) => (props.events ? 'white' : props.theme.palette.primary)};
+export const Title = styled.h1<{ events?: boolean; fontType: FontType }>`
+  color: ${(props) => (props.events ? 'Black' : props.theme.palette.primary)};
   ${fontTypeCss}
   margin-block: 0;
 `
 
 export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
-  ${(props) => `color: ${props.theme.palette.common.gray};`}
-  ${fontTypeCss}
+  ${(props) => `color: ${props.theme.palette.common.black};`}
   font-size: 1.1rem;
   white-space: pre-wrap;
   margin: 0;
@@ -103,7 +102,15 @@ function PageSectionComponent(props: Props) {
   return (
     <MainContainer imgPosition={props.imgPosition}>
       {props.imgPosition && (
-        <ImageContainer src={props.imageSrc ?? imgPlaceholder} alt={props.title} />
+        <ImageContainer>
+          <Image
+            src={props.imageSrc?.src ?? imgPlaceholder}
+            height={300}
+            width={300}
+            alt={props.title}
+            // priority={false}
+          />
+        </ImageContainer>
       )}
       <TextContainer>
         <Title fontType={sectionTitle} events={props.events}>
