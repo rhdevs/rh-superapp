@@ -1,4 +1,5 @@
 import NavBar from '@/components/NavBar'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
@@ -28,6 +29,14 @@ const EventDescription = styled.p`
   /* Add description styles here */
   font-size: 1rem; /* Adjust the font size for responsiveness */
 `
+const ViewPhotosContainer = styled.div`
+  border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
+  background-color: #ffffff; /* Add a background color */
+  padding: 0.5rem 1rem; /* Add padding for spacing */
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer; /* Change the cursor to indicate it's clickable */
+`
 
 const EventPage = () => {
   const router = useRouter()
@@ -56,6 +65,9 @@ const EventPage = () => {
         <EventTitle>{slug}</EventTitle>
         <EventImage src={imageUrl} alt="Event Image" />
         <EventDescription>{description}</EventDescription>
+        <ViewPhotosContainer>
+          <Link href="https://dummylinkphoto.com">View Photos</Link>
+        </ViewPhotosContainer>
       </PageContainer>
     </>
   )
