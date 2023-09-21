@@ -1,5 +1,3 @@
-// pages/events/[slug].js
-
 import NavBar from '@/components/NavBar'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
@@ -11,20 +9,24 @@ const PageContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   text-align: center;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  width: 85vw; /* Set the container width to 90% of the viewport width */
+  max-width: 800px; /* Add a max width for larger screens */
+  margin: 0 auto; /* Center align the container horizontally */
 `
 
 const EventImage = styled.img`
-  width: 600px;
+  width: 100%; /* Make the image responsive, it will fill the container's width */
+  max-width: 600px; /* Limit the maximum width of the image */
 `
 
 const EventTitle = styled.h1`
-  font-weight: bold;
+  /* Add title styles here */
+  font-size: 2rem; /* Adjust the font size for responsiveness */
 `
 
 const EventDescription = styled.p`
-  width: 600px;
+  /* Add description styles here */
+  font-size: 1rem; /* Adjust the font size for responsiveness */
 `
 
 const EventPage = () => {
