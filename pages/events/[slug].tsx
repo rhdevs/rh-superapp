@@ -50,7 +50,12 @@ const ViewPhotosContainer = styled.div`
   padding: 0.5rem 1rem; /* Add padding for spacing */
   width: 100%;
   margin-top: 20px;
-  cursor: pointer; /* Change the cursor to indicate it's clickable */
+`
+const ViewPhotoLink = styled.a`
+  color: #000000;
+  &:hover {
+    color: #555555;
+  }
 `
 
 // Styled Component for Top-Left Sticker/Image
@@ -106,7 +111,14 @@ const EventPage = () => {
           <EventDescription>{description}</EventDescription>
         </DescriptionContainer>
         <ViewPhotosContainer>
-          <Link href="https://dummylinkphoto.com">View Photos</Link>
+          <Link
+            prefetch
+            passHref
+            href="https://dummylinkphoto.com"
+            style={{ textDecoration: 'none' }}
+          >
+            <ViewPhotoLink>pictures: https://dummylinkphoto.com</ViewPhotoLink>
+          </Link>
         </ViewPhotosContainer>
       </PageContainer>
     </>
