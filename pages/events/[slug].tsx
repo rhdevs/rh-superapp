@@ -2,6 +2,7 @@ import NavBar from '@/components/NavBar'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
+import descriptionBg from 'public/assets/events/description_bg.png'
 
 // Styled Components
 const PageContainer = styled.div`
@@ -23,6 +24,15 @@ const EventImage = styled.img`
 const EventTitle = styled.h1`
   /* Add title styles here */
   font-size: 2rem; /* Adjust the font size for responsiveness */
+`
+
+const DescriptionContainer = styled.div`
+  font-size: 1rem;
+  background-image: url(${descriptionBg?.src});
+  background-size: cover; /* Adjust this to control the image sizing */
+  padding: 2rem; /* Add padding for spacing around the description */
+  margin-top: 20px;
+  text-align: left; /* Align the text to the left */
 `
 
 const EventDescription = styled.p`
@@ -64,7 +74,9 @@ const EventPage = () => {
       <PageContainer>
         <EventTitle>{slug}</EventTitle>
         <EventImage src={imageUrl} alt="Event Image" />
-        <EventDescription>{description}</EventDescription>
+        <DescriptionContainer>
+          <EventDescription>{description}</EventDescription>
+        </DescriptionContainer>
         <ViewPhotosContainer>
           <Link href="https://dummylinkphoto.com">View Photos</Link>
         </ViewPhotosContainer>
