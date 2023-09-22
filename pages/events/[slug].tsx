@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import descriptionBg from 'public/assets/events/description_bg.png'
+import breakpoints from '@/styles/breakpoints'
 
 // Styled Components
 const PageContainer = styled.div`
@@ -31,9 +32,12 @@ const DescriptionContainer = styled.div`
   font-size: 1rem;
   background-image: url(${descriptionBg?.src});
   background-size: cover; /* Adjust this to control the image sizing */
-  padding: 2rem; /* Add padding for spacing around the description */
-  margin-top: 20px;
   text-align: left; /* Align the text to the left */
+  margin-top: 20px;
+  padding: 0.75rem; /* Add padding for spacing around the description */
+  @media only screen and ${breakpoints.device.lg} {
+    padding: 1.5rem; /* Add padding for spacing around the description */
+  }
 `
 
 const EventDescription = styled.p`
