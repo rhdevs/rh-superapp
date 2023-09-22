@@ -27,6 +27,7 @@ const EventTitle = styled.h1`
 `
 
 const DescriptionContainer = styled.div`
+  position: relative;
   font-size: 1rem;
   background-image: url(${descriptionBg?.src});
   background-size: cover; /* Adjust this to control the image sizing */
@@ -46,6 +47,24 @@ const ViewPhotosContainer = styled.div`
   width: 100%;
   margin-top: 20px;
   cursor: pointer; /* Change the cursor to indicate it's clickable */
+`
+
+// Styled Component for Top-Left Sticker/Image
+const TopLeftSticker = styled.img`
+  position: absolute;
+  width: 10%;
+  top: 0px; /* Adjust the top position as needed */
+  left: -40px; /* Adjust the left position as needed */
+  z-index: 1; /* Ensure the sticker/image appears above the background */
+`
+
+// Styled Component for Bottom-Right Sticker/Image
+const BottomRightSticker = styled.img`
+  position: absolute;
+  width: 10%;
+  bottom: -30px; /* Adjust the bottom position as needed */
+  right: -40px; /* Adjust the right position as needed */
+  z-index: 1; /* Ensure the sticker/image appears above the background */
 `
 
 const EventPage = () => {
@@ -75,6 +94,11 @@ const EventPage = () => {
         <EventTitle>{slug}</EventTitle>
         <EventImage src={imageUrl} alt="Event Image" />
         <DescriptionContainer>
+          <TopLeftSticker src="/assets/events/stickers/moon_sticker.png" alt="Moon Sticker" />
+          <BottomRightSticker
+            src="/assets/events/stickers/lightning_sticker.png"
+            alt="Lightning Sticker"
+          />
           <EventDescription>{description}</EventDescription>
         </DescriptionContainer>
         <ViewPhotosContainer>
