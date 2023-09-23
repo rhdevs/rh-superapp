@@ -34,7 +34,7 @@ const DescriptionContainer = styled.div`
   background-size: cover; /* Adjust this to control the image sizing */
   text-align: left; /* Align the text to the left */
   margin-top: 20px;
-  padding: 0.75rem; /* Add padding for spacing around the description */
+  padding: 1rem;
   @media only screen and ${breakpoints.device.lg} {
     padding: 1.5rem; /* Add padding for spacing around the description */
   }
@@ -63,17 +63,23 @@ const ViewPhotoLink = styled.p`
 const TopLeftSticker = styled.img`
   position: absolute;
   width: 10%;
-  top: 0px; /* Adjust the top position as needed */
-  left: -40px; /* Adjust the left position as needed */
+  top: 0vh; /* Adjust the top position as needed */
+  left: -5vw; /* Adjust the left position as needed */
   z-index: 1; /* Ensure the sticker/image appears above the background */
+  @media only screen and ${breakpoints.device.md} {
+    left: -4.5vw;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    left: -40px;
+  }
 `
 
 // Styled Component for Bottom-Right Sticker/Image
 const BottomRightSticker = styled.img`
   position: absolute;
   width: 10%;
-  bottom: -30px; /* Adjust the bottom position as needed */
-  right: -40px; /* Adjust the right position as needed */
+  bottom: -4vh; /* Adjust the bottom position as needed */
+  right: -3vw; /* Adjust the right position as needed */
   z-index: 1; /* Ensure the sticker/image appears above the background */
 `
 
