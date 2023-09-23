@@ -13,7 +13,7 @@ const PageContainer = styled.div`
   min-height: 100vh;
   text-align: center;
   width: 85vw; /* Set the container width to 90% of the viewport width */
-  max-width: 800px; /* Add a max width for larger screens */
+  max-width: 900px; /* Add a max width for larger screens */
   margin: 0 auto; /* Center align the container horizontally */
 `
 
@@ -25,6 +25,11 @@ const EventImage = styled.img`
 const EventTitle = styled.h1`
   /* Add title styles here */
   font-size: 2rem; /* Adjust the font size for responsiveness */
+  margin: 1vh 1vw;
+`
+
+const ImageContainer = styled.div`
+  position: relative;
 `
 
 const DescriptionContainer = styled.div`
@@ -34,9 +39,9 @@ const DescriptionContainer = styled.div`
   background-size: cover; /* Adjust this to control the image sizing */
   text-align: left; /* Align the text to the left */
   margin-top: 20px;
-  padding: 1rem;
-  @media only screen and ${breakpoints.device.lg} {
-    padding: 1.5rem; /* Add padding for spacing around the description */
+  padding: 0.5rem 1rem;
+  @media only screen and ${breakpoints.device.sm} {
+    padding: 0.75rem 1.5rem; /* Add padding for spacing around the description */
   }
 `
 
@@ -60,26 +65,41 @@ const ViewPhotoLink = styled.p`
 `
 
 // Styled Component for Top-Left Sticker/Image
-const TopLeftSticker = styled.img`
+const MoonSticker = styled.img`
   position: absolute;
   width: 10%;
+  max-width: 60px;
   top: 0vh; /* Adjust the top position as needed */
-  left: -5vw; /* Adjust the left position as needed */
+  left: -3.3vw; /* Adjust the left position as needed */
   z-index: 1; /* Ensure the sticker/image appears above the background */
   @media only screen and ${breakpoints.device.md} {
-    left: -4.5vw;
-  }
-  @media only screen and ${breakpoints.device.lg} {
-    left: -40px;
+    left: -2.3vw;
   }
 `
 
 // Styled Component for Bottom-Right Sticker/Image
-const BottomRightSticker = styled.img`
+const LightningSticker = styled.img`
   position: absolute;
   width: 10%;
+  max-width: 60px;
   bottom: -4vh; /* Adjust the bottom position as needed */
-  right: -3vw; /* Adjust the right position as needed */
+  right: -2vw; /* Adjust the right position as needed */
+  z-index: 1; /* Ensure the sticker/image appears above the background */
+`
+
+const HeartSticker = styled.img`
+  position: absolute;
+  width: 10%;
+  top: -2.5vh; /* Adjust the bottom position as needed */
+  left: -2.5vw; /* Adjust the right position as needed */
+  z-index: 1; /* Ensure the sticker/image appears above the background */
+`
+
+const FlowerSticker = styled.img`
+  position: absolute;
+  width: 10%;
+  bottom: -2.5vh; /* Adjust the bottom position as needed */
+  right: -2vw; /* Adjust the right position as needed */
   z-index: 1; /* Ensure the sticker/image appears above the background */
 `
 
@@ -91,10 +111,15 @@ const EventPage = () => {
       <NavBar />
       <PageContainer>
         <EventTitle>{event.name}</EventTitle>
-        <EventImage src={event.image.src} alt="Event Image" />
+        <ImageContainer>
+          <FlowerSticker src="/assets/events/stickers/flower_sticker.png" alt="Flower Sticker" />
+          <HeartSticker src="/assets/events/stickers/heart_sticker.png" alt="Heart Sticker" />
+          <EventImage src={event.image.src} alt="Event Image" />
+        </ImageContainer>
+
         <DescriptionContainer>
-          <TopLeftSticker src="/assets/events/stickers/moon_sticker.png" alt="Moon Sticker" />
-          <BottomRightSticker
+          <MoonSticker src="/assets/events/stickers/moon_sticker.png" alt="Moon Sticker" />
+          <LightningSticker
             src="/assets/events/stickers/lightning_sticker.png"
             alt="Lightning Sticker"
           />
