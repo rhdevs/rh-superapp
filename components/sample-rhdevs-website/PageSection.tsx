@@ -68,6 +68,9 @@ export const Title = styled.h1<{ events?: boolean; fontType: FontType }>`
   color: ${(props) => (props.events ? 'Black' : props.theme.palette.primary)};
   ${fontTypeCss}
   margin-block: 0;
+  &:hover {
+    color: ${(props) => (props.events ? '#555' : props.theme.palette.secondary)};
+  }
 `
 
 export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
@@ -114,7 +117,7 @@ function PageSectionComponent(props: Props) {
         </ImageContainer>
       )}
       <TextContainer>
-        <Link href={'events/' + stringToSlug(props.title)}>
+        <Link href={'events/' + stringToSlug(props.title)} style={{ textDecoration: 'none' }}>
           <Title fontType={sectionTitle} events={props.events}>
             {props.title}
           </Title>
