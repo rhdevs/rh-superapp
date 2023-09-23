@@ -1,9 +1,9 @@
 import NavBar from '@/components/NavBar'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import descriptionBg from 'public/assets/events/description_bg.png'
 import breakpoints from '@/styles/breakpoints'
+import { Event, valentinesFundraiser } from '@/texts/common/dummy'
 
 // Styled Components
 const PageContainer = styled.div`
@@ -47,11 +47,11 @@ const EventDescription = styled.p`
 const ViewPhotosContainer = styled.div`
   border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
   background-color: #ffffff; /* Add a background color */
-  padding: 0.5rem 1rem; /* Add padding for spacing */
+  padding: 0.2 rem; /* Add padding for spacing */
   width: 100%;
   margin-top: 20px;
 `
-const ViewPhotoLink = styled.a`
+const ViewPhotoLink = styled.p`
   color: #000000;
   &:hover {
     color: #555555;
@@ -77,38 +77,21 @@ const BottomRightSticker = styled.img`
 `
 
 const EventPage = () => {
-  const router = useRouter()
-  const { slug } = router.query // Get the slug from the route parameter
-
   // Replace this with your actual image URL
-  const imageUrl = '/assets/sample-photos/photo1.jpg'
-
-  // Dummy description
-  const description = `
-    Still thinking of what to get your friends or that special someone for VALENTINES DAY? RVC SP got you!!! 
-    With a wide assortment of gifts from fresh flowers and preserved flowers , there's bound to be something for everyone! 
-    As all stocks are limited, fill up the pre order form HERE to get FIRST DIBS on your items! 
-    .
-    P.S. Due to unforeseen circumstances, our crochet flowers will not be sold anymore but fret not! 
-    The other options are still available so faster PREORDER NOWWWW
-    
-    All profits will be channelled to support the welfare of our beneficiaries so DONT WAIT ANYMORE!!! 
-    Show your love to your friends/ boo and do a good deed today!
-  `
-
+  const event: Event = valentinesFundraiser
   return (
     <>
       <NavBar />
       <PageContainer>
-        <EventTitle>{slug}</EventTitle>
-        <EventImage src={imageUrl} alt="Event Image" />
+        <EventTitle>{event.name}</EventTitle>
+        <EventImage src={event.image.src} alt="Event Image" />
         <DescriptionContainer>
           <TopLeftSticker src="/assets/events/stickers/moon_sticker.png" alt="Moon Sticker" />
           <BottomRightSticker
             src="/assets/events/stickers/lightning_sticker.png"
             alt="Lightning Sticker"
           />
-          <EventDescription>{description}</EventDescription>
+          <EventDescription>{event.description}</EventDescription>
         </DescriptionContainer>
         <ViewPhotosContainer>
           <Link
