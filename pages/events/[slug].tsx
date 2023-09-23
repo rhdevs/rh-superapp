@@ -42,7 +42,8 @@ const DescriptionContainer = styled.div`
 
 const EventDescription = styled.p`
   /* Add description styles here */
-  font-size: 1rem; /* Adjust the font size for responsiveness */
+  font-size: 1rem;
+  font-family: 'BryndanWrite';
 `
 const ViewPhotosContainer = styled.div`
   border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
