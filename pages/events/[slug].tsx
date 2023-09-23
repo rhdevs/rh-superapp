@@ -26,6 +26,7 @@ const EventTitle = styled.h1`
   /* Add title styles here */
   font-size: 2rem; /* Adjust the font size for responsiveness */
   margin: 1vh 1vw;
+  font-family: 'BryndanWrite';
 `
 
 const ImageContainer = styled.div`
