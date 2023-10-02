@@ -41,7 +41,7 @@ export default function Home() {
     <HomeContainer>
       <WelcomeContainer>
         <NavBar />
-        <Image src="/assets/welcomeText.png" width={800} height={450} alt="Welcome Text" />
+        <Image src="/assets/welcomeText.png" width={1000} height={560} alt="Welcome Text" />
       </WelcomeContainer>
       <CaptionContainer>
         <h1>Browse our latest events!</h1>
