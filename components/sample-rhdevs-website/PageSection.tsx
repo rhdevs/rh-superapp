@@ -1,9 +1,10 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
 import styled, { keyframes, FontType, useTheme } from 'styled-components'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
-
 import imgPlaceholder from '@/public/assets/noimg.png'
+import { stringToSlug } from '@/utils/stringToSlug'
 
 const fadeInUp = keyframes`
     from {
@@ -67,6 +68,9 @@ export const Title = styled.h1<{ events?: boolean; fontType: FontType }>`
   color: ${(props) => (props.events ? 'Black' : props.theme.palette.primary)};
   ${fontTypeCss}
   margin-block: 0;
+  &:hover {
+    color: ${(props) => (props.events ? '#555' : props.theme.palette.secondary)};
+  }
 `
 
 export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
@@ -113,9 +117,12 @@ function PageSectionComponent(props: Props) {
         </ImageContainer>
       )}
       <TextContainer>
-        <Title fontType={sectionTitle} events={props.events}>
-          {props.title}
-        </Title>
+        <Link href={'events/' + stringToSlug(props.title)} style={{ textDecoration: 'none' }}>
+          <Title fontType={sectionTitle} events={props.events}>
+            {props.title}
+          </Title>
+        </Link>
+
         <Body fontType={sectionText} events={props.events}>
           {props.description}
         </Body>

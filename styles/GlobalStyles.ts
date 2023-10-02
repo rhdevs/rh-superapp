@@ -15,8 +15,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: 'BryndanWrite'
-    src: url('/assets/fonts/Bryndan_Write.ttf') format('ttf');
+    font-family: 'BryndanWrite';
+    src: url('/assets/fonts/Bryndan_Write.ttf') format('truetype');
   }
 
   code {
