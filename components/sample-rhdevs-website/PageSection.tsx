@@ -26,6 +26,7 @@ export const MainContainer = styled.div<{
   animation-name: ${fadeInUp};
   display: grid;
   grid-template-rows: minmax(0, 1fr);
+  text-align: center;
   grid-template-columns: ${(props) => props.imgPosition && 'auto'} auto;
   grid-template-areas: '${(props) => props.imgPosition === 'left' && 'image'} text ${(props) =>
     props.imgPosition === 'right' && 'image'}';
@@ -71,6 +72,7 @@ export const Title = styled.h1<{ events?: boolean; fontType: FontType }>`
   &:hover {
     color: ${(props) => (props.events ? '#555' : props.theme.palette.secondary)};
   }
+  font-family: 'BryndanWrite';
 `
 
 export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
@@ -79,6 +81,22 @@ export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
   white-space: pre-wrap;
   margin: 0;
   text-align: justify;
+  font-family: 'BryndanWrite';
+`
+
+const ViewPhotosContainer = styled.div`
+  border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
+  background-color: #ffffff; /* Add a background color */
+  padding: 0.2 rem; /* Add padding for spacing */
+  width: 100%;
+  margin-top: 20px;
+`
+const ViewPhotoLink = styled.p`
+  color: #000000;
+  &:hover {
+    color: #555555;
+  }
+  font-family: 'BryndanWrite';
 `
 
 type Props = {
@@ -87,6 +105,7 @@ type Props = {
   imgPosition?: 'left' | 'right' | undefined
   imageSrc?: StaticImageData
   events?: boolean
+  signUpLink?: string | null
 } & typeof defaultProps
 
 const defaultProps: {
@@ -126,6 +145,9 @@ function PageSectionComponent(props: Props) {
         <Body fontType={sectionText} events={props.events}>
           {props.description}
         </Body>
+        <ViewPhotosContainer>
+          <ViewPhotoLink>sign-up link: {props.signUpLink ? props.signUpLink : 'NA'} </ViewPhotoLink>
+        </ViewPhotosContainer>
       </TextContainer>
     </MainContainer>
   )

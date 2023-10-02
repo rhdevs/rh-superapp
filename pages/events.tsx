@@ -54,6 +54,22 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `
 
+const Title = styled.div`
+  font-size: 4rem;
+  justify-content: center;
+  display: flex;
+  font-weight: 800;
+  font-family: 'BryndanWrite';
+`
+
+const EventsAvailable = styled.div`
+  margin-top: 40px;
+  font-size: 2rem;
+  justify-content: center;
+  display: flex;
+  font-family: 'BryndanWrite';
+`
+
 const EventsWrapper = styled.div`
   display: flex
   flex-direction: row;
@@ -68,7 +84,6 @@ const EventHeader = styled.h1`
 `
 
 const SearchBarWrapper = styled.div`
-  padding: 10px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -287,6 +302,7 @@ useEffect(() => {
     >
       <NavBar />
     <InformationMainContainer>
+      <Title>UPCOMING EVENTS</Title>
       <HeaderWrapper>
         <EventSearch />
         <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
@@ -297,7 +313,7 @@ useEffect(() => {
             </Space>
           </a>
         </Dropdown>
-        <h2>{eventCount} events available</h2>
+        <EventsAvailable>{eventCount} events available, showing events {(pageCount * 10 - 9)} to {Math.min(pageCount * 10, eventCount)}</EventsAvailable>
       </HeaderWrapper>
       {eventsDisplayed.map((event, index) => (
         <PageSectionComponent
