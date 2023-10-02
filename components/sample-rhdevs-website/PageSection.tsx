@@ -93,9 +93,6 @@ const ViewPhotosContainer = styled.div`
 `
 const ViewPhotoLink = styled.p`
   color: #000000;
-  &:hover {
-    color: #555555;
-  }
   font-family: 'BryndanWrite';
 `
 

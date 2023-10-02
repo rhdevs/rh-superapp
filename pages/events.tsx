@@ -84,7 +84,8 @@ const EventHeader = styled.h1`
 `
 
 const SearchBarWrapper = styled.div`
-  margin: 0 auto;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: row;
 
@@ -94,8 +95,10 @@ const SearchBarWrapper = styled.div`
 `
 
 const SearchBar = styled.input`
+  margin-right: 5px;
   width: 100%;
   padding: 1px;
+  border-radius: 5px;
   type: text;
 `
 

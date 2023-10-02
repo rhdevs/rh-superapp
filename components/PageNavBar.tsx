@@ -10,7 +10,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
   bottom: 10;
-  justify-content: center;
+  justify-content: space-evenly;
 `
 
 type Props = {
@@ -24,6 +24,7 @@ const PageNavBar = (props: Props) => (
   <MainContainer>
     {
       <Button
+        style={{ background: '#ab7865'}}
         type="primary"
         title="Previous"
         onClick={() => {
@@ -36,6 +37,7 @@ const PageNavBar = (props: Props) => (
     }
     {
       <Button
+        style={{ background: '#ab7865'}}
         type="primary"
         title="Next"
         onClick={() => {
