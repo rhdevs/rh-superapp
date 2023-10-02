@@ -5,9 +5,21 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 const responsive = [
+  { breakPoint: 1580, cardsToShow: 5 }, // this will be applied if screen size is greater than 1280px. cardsToShow will become 4.
+  { breakPoint: 800, cardsToShow: 4 },
   { breakPoint: 640, cardsToShow: 3 },
-  { breakPoint: 1280, cardsToShow: 4 }, // this will be applied if screen size is greater than 1280px. cardsToShow will become 4.
 ]
+
+const DotsWrapper = styled.ul`
+  display: block;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  width: fit-content;
+`
 
 const ImageContainer = styled.div<{ $height?: number }>`
   display: flex;
@@ -44,7 +56,13 @@ const Carousel = ({ imgArr }) => {
   }, [])
 
   return (
-    <Slider responsive={responsive} showDots={true} autoSlide={3000}>
+    <Slider
+      responsive={responsive}
+      showDots={true}
+      autoSlide={3000}
+      margin={'0px 15px'}
+      DotsWrapper={DotsWrapper}
+    >
       {imgArr &&
         imgArr.map((item) => (
           <ImageContainer key={item.id} $height={imageHeight}>
