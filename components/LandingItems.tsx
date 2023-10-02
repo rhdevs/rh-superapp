@@ -88,9 +88,7 @@ const EventContext = createContext<EventContextInterface>(defaultEventContext)
  * @returns <ParallaxBanner> component
  */
 export const ParallaxHero = () => (
-  <ParallaxBanner
-    layers={[{ image: '/assets/sample_photos/photo1.jpg', speed: -30, alt: 'Parallax Image' }]}
-  />
+  <ParallaxBanner layers={[{ image: '/assets/sample_photos/photo1.jpg', speed: -30 }]} />
 )
 
 /**
