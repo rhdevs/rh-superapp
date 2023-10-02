@@ -1,6 +1,7 @@
 import NavBar from '@/components/NavBar'
 import styled from 'styled-components'
 import Image from 'next/image'
+import Carousel from '@/components/Carousel'
 
 const carouselPhotos = [
   { id: 1, src: '/assets/sample-photos/photo1.jpg' },
@@ -43,6 +44,7 @@ export default function Home() {
         <NavBar />
         <Image src="/assets/welcomeText.png" width={800} height={450} alt="Welcome Text" />
       </WelcomeContainer>
+      <Carousel imgArr={carouselPhotos} />
       <CaptionContainer>
         <h1>Browse our latest events!</h1>
       </CaptionContainer>
