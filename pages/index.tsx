@@ -19,6 +19,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   padding-bottom: 10px;
 `
+
 const WelcomeContainer = styled.div`
   text-align: center;
   justify-content: center;
@@ -28,6 +29,21 @@ const WelcomeContainer = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+`
+
+const ImageWrapper = styled.div`
+  width: 100%;
+
+> div {
+  position: unset !important;
+}
+
+.image {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+}
 `
 
 const CaptionContainer = styled.div`
@@ -42,7 +58,9 @@ export default function Home() {
     <HomeContainer>
       <WelcomeContainer>
         <NavBar />
-        <Image src="/assets/welcomeText.png" width={800} height={450} alt="Welcome Text" />
+        <ImageWrapper>
+        <Image src="/assets/welcomeText.png" objectFit="contain" fill={true} alt="Welcome Text" />
+        </ImageWrapper>
       </WelcomeContainer>
       <Carousel imgArr={carouselPhotos} />
       <CaptionContainer>
