@@ -34,16 +34,16 @@ const WelcomeContainer = styled.div`
 const ImageWrapper = styled.div`
   width: 100%;
 
-> div {
-  position: unset !important;
-}
+  div {
+    position: unset !important;
+  }
 
-.image {
-  object-fit: contain;
-  width: 100% !important;
-  position: relative !important;
-  height: unset !important;
-}
+  .image {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+  }
 `
 
 const CaptionContainer = styled.div`
@@ -59,7 +59,7 @@ export default function Home() {
       <WelcomeContainer>
         <NavBar />
         <ImageWrapper>
-        <Image src="/assets/welcomeText.png" objectFit="contain" fill={true} alt="Welcome Text" />
+          <Image src="/assets/welcomeText.png" objectFit="contain" fill={true} alt="Welcome Text" />
         </ImageWrapper>
       </WelcomeContainer>
       <Carousel imgArr={carouselPhotos} />
