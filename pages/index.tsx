@@ -21,6 +21,8 @@ const HomeContainer = styled.div`
 `
 
 const WelcomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
   justify-content: center;
   width: 100%;
@@ -31,18 +33,22 @@ const WelcomeContainer = styled.div`
   background-repeat: no-repeat;
 `
 
-const ImageWrapper = styled.div`
-  width: 100%;
+const ImageContainer = styled.div`
+  width: 60vw;
+  height: 100%;
+  max-width: 1000px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: content-box;
 
-  div {
-    position: unset !important;
+  @media only screen and (max-width: 1000px) {
+    width: 70vw;
   }
 
-  .image {
-    object-fit: contain;
-    width: 100% !important;
-    position: relative !important;
-    height: unset !important;
+  @media only screen and (max-width: 500px) {
+    width: 90vw;
   }
 `
 
@@ -58,9 +64,9 @@ export default function Home() {
     <HomeContainer>
       <WelcomeContainer>
         <NavBar />
-        <ImageWrapper>
-          <Image src="/assets/welcomeText.png" objectFit="contain" fill={true} alt="Welcome Text" />
-        </ImageWrapper>
+        <ImageContainer>
+          <Image src="/assets/welcomeText.png" fill alt="Welcome Text" />
+        </ImageContainer>
       </WelcomeContainer>
       <Carousel imgArr={carouselPhotos} />
       <CaptionContainer>
