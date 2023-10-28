@@ -6,7 +6,7 @@ import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Dropdown, Space } from 'antd'
 import styled from 'styled-components'
-import { dummyData } from '@/texts/common/dummy'
+import { Event, dummyData } from '@/texts/common/dummy'
 import PageNavBar from '@/components/PageNavBar'
 import NavBar from '@/components/NavBar'
 
@@ -156,9 +156,9 @@ const defaultEventContext: EventContextInterface = {
 
 const EventContext = createContext<EventContextInterface>(defaultEventContext)
 
-
 const EventSearch = () => {
-  const { searchString, setSearchString, sortType, sortEvents, query, setQuery } = useContext(EventContext)
+  const { searchString, setSearchString, sortType, sortEvents, query, setQuery } =
+    useContext(EventContext)
   return (
     <SearchBarWrapper>
       <SearchBar
@@ -167,25 +167,31 @@ const EventSearch = () => {
           setSearchString(e.target.value)
         }}
       />
-      <Button type="primary" title="Search" onClick={() => {
+      <Button
+        type="primary"
+        title="Search"
+        onClick={() => {
           setQuery(searchString.trim())
-        }} >
-          Search
-        </Button>
+        }}
+      >
+        Search
+      </Button>
     </SearchBarWrapper>
   )
 }
 
-export default function Events() {
-  const defaultList = dummyData
+export default function Events(data: Event[]) {
+  const defaultList = data
   const [eventsArr, setEventsArr] = useState(defaultList)
   const [sortType, setSortType] = useState('0')
   const [search, setSearch] = useState('')
   const [isNextVisible, setIsNextVisible] = useState(false)
   const [isPrevVisible, setIsPrevVisible] = useState(false)
   const [pageCount, setPageCount] = useState(1)
-  const [query, setQuery] = useState("")
-  const [eventsDisplayed, setEventsDisplayed] = useState(defaultList.length <= 10 ? defaultList : defaultList.slice(0, 9))
+  const [query, setQuery] = useState('')
+  const [eventsDisplayed, setEventsDisplayed] = useState(
+    defaultList.length <= 10 ? defaultList : defaultList.slice(0, 9),
+  )
   const [eventCount, setEventCount] = useState(defaultList.length)
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
@@ -198,7 +204,7 @@ export default function Events() {
     setPageCount(1)
     eventCount < 10 && setIsNextVisible(false)
     eventCount >= 10 && setIsNextVisible(true)
-  } 
+  }
 
   const sortEvents = (key) => {
     const sortProperty = types[key]
@@ -230,7 +236,7 @@ export default function Events() {
     setEventsArr(sorted)
     showFirstPage()
   }
-  
+
   const navigateToNext = () => {
     setPageCount(pageCount + 1)
     setIsPrevVisible(true)
@@ -243,53 +249,57 @@ export default function Events() {
   }
 
   // First useEffect: Update eventCount when the query changes
-useEffect(() => {
-  console.log("Query changed!")
-  console.log("Query: " + query)
+  useEffect(() => {
+    console.log('Query changed!')
+    console.log('Query: ' + query)
 
-  // Check if the query is blank or empty
-  if (query.trim() === "") {
-    setEventCount(defaultList.length)
-    setPageCount(1)
-  } else {
+    async function fetchQueriedData() {
+      // Check if the query is blank or empty
+      if (query.trim() === '') {
+        setEventCount(defaultList.length)
+        setPageCount(1)
+      } else {
+        try {
+          const realQuery = query.toLowerCase()
+          const res = await fetch(`https://.../events/${realQuery}`)
+          const data = await res.json()
+          const filteredEvents: Event[] = data as Event[]
+
+          setEventCount(filteredEvents.length)
+          setEventsArr(filteredEvents)
+        } catch (error) {
+          console.error('Error fetching events data', error)
+        }
+      }
+    }
+    fetchQueriedData()
+  }, [query, defaultList])
+
+  // Second useEffect: Update eventsArr based on the filtered query
+  useEffect(() => {
+    console.log('Events Array Refreshed!')
     const realQuery = query.toLowerCase()
     const filtered = defaultList.filter((event) => {
       return searchedCategories.some((type) => {
         return event[type].toLowerCase().includes(realQuery)
       })
     })
-    setEventCount(filtered.length)
     setEventsArr(filtered)
-  }
-}, [query, defaultList]);
+  }, [query, defaultList])
 
-// Second useEffect: Update eventsArr based on the filtered query
-useEffect(() => {
-  console.log("Events Array Refreshed!")
-  const realQuery = query.toLowerCase()
-  const filtered = defaultList.filter((event) => {
-    return searchedCategories.some((type) => {
-      return event[type].toLowerCase().includes(realQuery)
-    })
-  })
-  setEventsArr(filtered)
-}, [query, defaultList])
+  // Third useEffect: Update eventsDisplayed and isNextVisible based on eventCount and pageCount
+  useEffect(() => {
+    console.log('Page Count Changed!')
+    console.log('Page: ' + pageCount)
+    console.log('EventCount: ' + eventCount)
 
-// Third useEffect: Update eventsDisplayed and isNextVisible based on eventCount and pageCount
-useEffect(() => {
-  console.log("Page Count Changed!")
-  console.log("Page: " + pageCount)
-  console.log("EventCount: " + eventCount)
+    const startIndex = (pageCount - 1) * 10
+    const endIndex = Math.min(pageCount * 10, eventCount)
+    setEventsDisplayed(eventsArr.slice(startIndex, endIndex))
 
-  const startIndex = (pageCount - 1) * 10
-  const endIndex = Math.min(pageCount * 10, eventCount)
-  setEventsDisplayed(eventsArr.slice(startIndex, endIndex))
-
-  pageCount === 1 ? setIsPrevVisible(false) : setIsPrevVisible(true)
-  eventCount < pageCount * 10 ? setIsNextVisible(false) : setIsNextVisible(true)
-}, [pageCount, eventCount, eventsArr]);
-
-  
+    pageCount === 1 ? setIsPrevVisible(false) : setIsPrevVisible(true)
+    eventCount < pageCount * 10 ? setIsNextVisible(false) : setIsNextVisible(true)
+  }, [pageCount, eventCount, eventsArr])
 
   return (
     <EventContext.Provider
@@ -300,36 +310,66 @@ useEffect(() => {
         setSearchString: setSearch,
         sortEvents: sortEvents,
         query: query,
-        setQuery: setQuery
+        setQuery: setQuery,
       }}
     >
       <NavBar />
-    <InformationMainContainer>
-      <Title>UPCOMING EVENTS</Title>
-      <HeaderWrapper>
-        <EventSearch />
-        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              Sort by
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
-        <EventsAvailable>{eventCount} events available, showing events {(pageCount * 10 - 9)} to {Math.min(pageCount * 10, eventCount)}</EventsAvailable>
-      </HeaderWrapper>
-      {eventsDisplayed.map((event, index) => (
-        <PageSectionComponent
-          key={index}
-          title={event.name}
-          description={event.description}
-          imgPosition={index % 2 === 0 ? 'left' : 'right'}
-          imageSrc={event.image}
-          events
-        />
-      ))}
-    </InformationMainContainer>
-    <PageNavBar navigateToNext={navigateToNext} navigateToPrev={navigateToPrev} isNextVisible={isNextVisible} isPrevVisible={isPrevVisible}/>
+      <InformationMainContainer>
+        <Title>UPCOMING EVENTS</Title>
+        <HeaderWrapper>
+          <EventSearch />
+          <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                Sort by
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+          <EventsAvailable>
+            {eventCount} events available, showing events {pageCount * 10 - 9} to{' '}
+            {Math.min(pageCount * 10, eventCount)}
+          </EventsAvailable>
+        </HeaderWrapper>
+        {eventsDisplayed.map((event, index) => (
+          <PageSectionComponent
+            key={index}
+            title={event.name}
+            description={event.description}
+            imgPosition={index % 2 === 0 ? 'left' : 'right'}
+            imageSrc={event.image}
+            events
+          />
+        ))}
+      </InformationMainContainer>
+      <PageNavBar
+        navigateToNext={navigateToNext}
+        navigateToPrev={navigateToPrev}
+        isNextVisible={isNextVisible}
+        isPrevVisible={isPrevVisible}
+      />
     </EventContext.Provider>
   )
+}
+
+// direct database queries.
+export async function getStaticProps() {
+  try {
+    const res = await fetch('https://.../events')
+    const posts = await res.json()
+    const data: Event[] = posts as Event[]
+
+    return {
+      props: {
+        data,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching events data', error)
+    return {
+      props: {
+        data: [], // Empty array or other default data
+      },
+    }
+  }
 }
