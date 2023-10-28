@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import Carousel from '@/components/Carousel'
 
-const carouselPhotos = [
-  { id: 1, src: '/assets/sample-photos/photo1.jpg' },
-  { id: 2, src: '/assets/sample-photos/photo2.jpg' },
-  { id: 3, src: '/assets/sample-photos/photo3.jpg' },
-  { id: 4, src: '/assets/sample-photos/photo4.jpg' },
-  { id: 5, src: '/assets/sample-photos/photo4.jpg' },
-  { id: 6, src: '/assets/sample-photos/photo3.jpg' },
-  { id: 7, src: '/assets/sample-photos/photo2.jpg' },
-  { id: 8, src: '/assets/sample-photos/photo1.jpg' },
-]
+// const carouselPhotos = [
+//   { id: 1, src: '/assets/sample-photos/photo1.jpg' },
+//   { id: 2, src: '/assets/sample-photos/photo2.jpg' },
+//   { id: 3, src: '/assets/sample-photos/photo3.jpg' },
+//   { id: 4, src: '/assets/sample-photos/photo4.jpg' },
+//   { id: 5, src: '/assets/sample-photos/photo4.jpg' },
+//   { id: 6, src: '/assets/sample-photos/photo3.jpg' },
+//   { id: 7, src: '/assets/sample-photos/photo2.jpg' },
+//   { id: 8, src: '/assets/sample-photos/photo1.jpg' },
+// ]
 
 const HomeContainer = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const CaptionContainer = styled.div`
   text-align: center;
 `
 
-export default function Home() {
+export default function Home(carouselPhotos) {
   console.log(typeof carouselPhotos)
   return (
     <HomeContainer>
@@ -50,4 +50,25 @@ export default function Home() {
       </CaptionContainer>
     </HomeContainer>
   )
+}
+
+export async function getStaticProps() {
+  try {
+    // Fetch photo URLs from the API route
+    const response = await fetch('/api/carouselPhotos') // This is the URL of your API route
+    const carouselPhotos = await response.json()
+
+    return {
+      props: {
+        carouselPhotos,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching photos', error)
+    return {
+      props: {
+        carouselPhotos: [],
+      },
+    }
+  }
 }
