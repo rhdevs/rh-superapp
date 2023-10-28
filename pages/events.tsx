@@ -253,20 +253,26 @@ export default function Events(data: Event[]) {
     console.log('Query changed!')
     console.log('Query: ' + query)
 
-    // Check if the query is blank or empty
-    if (query.trim() === '') {
-      setEventCount(defaultList.length)
-      setPageCount(1)
-    } else {
-      const realQuery = query.toLowerCase()
-      const filtered = defaultList.filter((event) => {
-        return searchedCategories.some((type) => {
-          return event[type].toLowerCase().includes(realQuery)
-        })
-      })
-      setEventCount(filtered.length)
-      setEventsArr(filtered)
+    async function fetchQueriedData() {
+      // Check if the query is blank or empty
+      if (query.trim() === '') {
+        setEventCount(defaultList.length)
+        setPageCount(1)
+      } else {
+        try {
+          const realQuery = query.toLowerCase()
+          const res = await fetch(`https://.../events/${realQuery}`)
+          const data = await res.json()
+          const filteredEvents: Event[] = data as Event[]
+
+          setEventCount(filteredEvents.length)
+          setEventsArr(filteredEvents)
+        } catch (error) {
+          console.error('Error fetching events data', error)
+        }
+      }
     }
+    fetchQueriedData()
   }, [query, defaultList])
 
   // Second useEffect: Update eventsArr based on the filtered query
