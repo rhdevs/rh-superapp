@@ -6,7 +6,7 @@ import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Dropdown, Space } from 'antd'
 import styled from 'styled-components'
-import { dummyData } from '@/texts/common/dummy'
+import { Event, dummyData } from '@/texts/common/dummy'
 import PageNavBar from '@/components/PageNavBar'
 import NavBar from '@/components/NavBar'
 
@@ -180,8 +180,8 @@ const EventSearch = () => {
   )
 }
 
-export default function Events() {
-  const defaultList = dummyData
+export default function Events(data: Event[]) {
+  const defaultList = data
   const [eventsArr, setEventsArr] = useState(defaultList)
   const [sortType, setSortType] = useState('0')
   const [search, setSearch] = useState('')
@@ -344,4 +344,26 @@ export default function Events() {
       />
     </EventContext.Provider>
   )
+}
+
+// direct database queries.
+export async function getStaticProps() {
+  try {
+    const res = await fetch('https://.../events')
+    const posts = await res.json()
+    const data: Event[] = posts as Event[]
+
+    return {
+      props: {
+        data,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching events data', error)
+    return {
+      props: {
+        data: [], // Empty array or other default data
+      },
+    }
+  }
 }
