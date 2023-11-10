@@ -1,1 +1,1 @@
-export const navTitles = ['Home', 'Events']
+export const navTitles = ['Home', 'Events', 'Calendar']
