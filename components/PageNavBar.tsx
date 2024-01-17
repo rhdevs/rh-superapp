@@ -24,7 +24,7 @@ const PageNavBar = (props: Props) => (
   <MainContainer>
     {
       <Button
-        style={{ background: '#ab7865'}}
+        style={{ background: '#ab7865' }}
         type="primary"
         title="Previous"
         onClick={() => {
@@ -37,7 +37,7 @@ const PageNavBar = (props: Props) => (
     }
     {
       <Button
-        style={{ background: '#ab7865'}}
+        style={{ background: '#ab7865' }}
         type="primary"
         title="Next"
         onClick={() => {
