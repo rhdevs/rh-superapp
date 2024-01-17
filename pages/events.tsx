@@ -90,7 +90,7 @@ const SearchBarWrapper = styled.div`
   flex-direction: row;
 
   input {
-    min-width: 250px;
+    min-width: 200px;
   }
 `
 
@@ -100,6 +100,23 @@ const SearchBar = styled.input`
   padding: 1px;
   border-radius: 5px;
   type: text;
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.7rem;
+  }
+`
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  white-space: nowrap;
+  align-items: center;
+
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.7rem;
+  }
 `
 
 const EventContainer = styled.button`
@@ -140,6 +157,7 @@ interface EventContextInterface {
   searchString: string
   setSearchString: (s: string) => void
   sortType: string
+  setSortType: (s: string) => void
   sortEvents: (s: string) => void
   query: string
   setQuery: (s: string) => void
@@ -149,6 +167,7 @@ const defaultEventContext: EventContextInterface = {
   searchString: '',
   setSearchString: () => {},
   sortType: '',
+  setSortType: () => {},
   sortEvents: () => {},
   query: '',
   setQuery: () => {},
@@ -158,7 +177,10 @@ const EventContext = createContext<EventContextInterface>(defaultEventContext)
 
 
 const EventSearch = () => {
-  const { searchString, setSearchString, sortType, sortEvents, query, setQuery } = useContext(EventContext)
+  const { searchString, setSearchString, setSortType, setQuery } = useContext(EventContext)
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    setSortType(key)
+  }
   return (
     <SearchBarWrapper>
       <SearchBar
@@ -171,7 +193,17 @@ const EventSearch = () => {
           setQuery(searchString.trim())
         }} >
           Search
-        </Button>
+      </Button>
+      <DropdownWrapper>
+        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick}}>
+          <a onClick={(e) => e.preventDefault()} >
+            <Space>
+              Sort by
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
+      </DropdownWrapper>       
     </SearchBarWrapper>
   )
 }
@@ -187,10 +219,6 @@ export default function Events() {
   const [query, setQuery] = useState("")
   const [eventsDisplayed, setEventsDisplayed] = useState(defaultList.length <= 10 ? defaultList : defaultList.slice(0, 9))
   const [eventCount, setEventCount] = useState(defaultList.length)
-
-  const onClick: MenuProps['onClick'] = ({ key }) => {
-    setSortType(key)
-  }
 
   const showFirstPage = () => {
     setEventsDisplayed(eventsArr.length <= 10 ? defaultList : defaultList.slice(0, 9))
@@ -297,6 +325,7 @@ useEffect(() => {
         // TODO consider wrapping it in a useMemo hook to prevent unnecessary re-renders
         searchString: search,
         sortType: sortType,
+        setSortType: setSortType,
         setSearchString: setSearch,
         sortEvents: sortEvents,
         query: query,
@@ -308,14 +337,6 @@ useEffect(() => {
       <Title>UPCOMING EVENTS</Title>
       <HeaderWrapper>
         <EventSearch />
-        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              Sort by
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
         <EventsAvailable>{eventCount} events available, showing events {(pageCount * 10 - 9)} to {Math.min(pageCount * 10, eventCount)}</EventsAvailable>
       </HeaderWrapper>
       {eventsDisplayed.map((event, index) => (

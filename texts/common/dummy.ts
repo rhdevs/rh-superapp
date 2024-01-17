@@ -17,8 +17,8 @@ export type Event = {
 
 export const valentinesFundraiser: Event = {
   id: 1,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-03T13:00:00'),
+  endTime: new Date('2023-11-03T14:00:00'),
   name: 'RC SP Valentines Fundraiser1',
   description: `
     Still thinking of what to get your friends or that special someone for VALENTINES DAY? RVC SP got you!!! 
@@ -44,8 +44,8 @@ export const valentinesFundraiser: Event = {
 
 export const animalTherapy: Event = {
   id: 2,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-03T13:00:00'),
+  endTime: new Date('2023-11-03T16:00:00'),
   name: 'Animal Therapy2',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -67,8 +67,8 @@ export const animalTherapy: Event = {
 
 export const buffer1: Event = {
   id: 3,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-14T12:00:00'),
+  endTime: new Date('2023-11-14T13:00:00'),
   name: 'Animal Therapy3',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -90,8 +90,8 @@ export const buffer1: Event = {
 
 export const buffer2: Event = {
   id: 4,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-14T12:00:00'),
+  endTime: new Date('2023-11-14T13:00:00'),
   name: 'Animal Therapy4',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -113,8 +113,8 @@ export const buffer2: Event = {
 
 export const buffer3: Event = {
   id: 5,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-17T12:00:00'),
+  endTime: new Date('2023-11-17T13:00:00'),
   name: 'Animal Therapy5',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -136,8 +136,8 @@ export const buffer3: Event = {
 
 export const buffer4: Event = {
   id: 6,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-14T12:00:00'),
+  endTime: new Date('2023-11-14T13:00:00'),
   name: 'Animal Therapy6',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -159,8 +159,8 @@ export const buffer4: Event = {
 
 export const buffer5: Event = {
   id: 7,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-19T12:00:00'),
+  endTime: new Date('2023-11-19T13:00:00'),
   name: 'Animal Therapy7',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -182,8 +182,8 @@ export const buffer5: Event = {
 
 export const buffer6: Event = {
   id: 8,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-22T12:00:00'),
+  endTime: new Date('2023-11-22T13:00:00'),
   name: 'Animal Therapy8',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -205,8 +205,8 @@ export const buffer6: Event = {
 
 export const buffer7: Event = {
   id: 9,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-27T12:00:00'),
+  endTime: new Date('2023-11-27T13:00:00'),
   name: 'Animal Therapy9',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -228,8 +228,8 @@ export const buffer7: Event = {
 
 export const buffer8: Event = {
   id: 10,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-10T12:00:00'),
+  endTime: new Date('2023-11-10T13:00:00'),
   name: 'Animal Therapy10',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
@@ -251,8 +251,8 @@ export const buffer8: Event = {
 
 export const buffer9: Event = {
   id: 11,
-  startTime: new Date('2021-02-14T12:00:00'),
-  endTime: new Date('2021-02-14T13:00:00'),
+  startTime: new Date('2023-11-01T12:00:00'),
+  endTime: new Date('2023-11-01T13:00:00'),
   name: 'Animal Therapy11',
   description: `
     Already behind on school work and feeling stressed? Or love animals and want to interact with cute dogs? 
