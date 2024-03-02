@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import descriptionBg from 'public/assets/events/description_bg.png'
 import breakpoints from '@/styles/breakpoints'
-import { Event, dnd, dummyData, valentinesFundraiser } from '@/texts/common/dummy'
+import { Event, dnd, dummyData } from '@/texts/common/dummy'
 import { useRouter } from 'next/router'
 import { stringToSlug } from '@/utils/stringToSlug'
 
