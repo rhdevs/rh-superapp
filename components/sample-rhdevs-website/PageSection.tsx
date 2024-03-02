@@ -94,6 +94,7 @@ const ViewPhotosContainer = styled.div`
 const ViewPhotoLink = styled.p`
   color: #000000;
   font-family: 'BryndanWrite';
+  break-word: break-all;
 `
 
 type Props = {
@@ -103,6 +104,7 @@ type Props = {
   imageSrc?: StaticImageData
   events?: boolean
   signUpLink?: string | null
+  photoLink?: string | null
 } & typeof defaultProps
 
 const defaultProps: {
@@ -143,7 +145,33 @@ function PageSectionComponent(props: Props) {
           {props.description}
         </Body>
         <ViewPhotosContainer>
-          <ViewPhotoLink>sign-up link: {props.signUpLink ? props.signUpLink : 'NA'} </ViewPhotoLink>
+          <ViewPhotoLink>
+            {props.photoLink ? (
+              <ViewPhotosContainer>
+                <Link
+                  prefetch
+                  passHref
+                  href={props.photoLink || '/404'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ViewPhotoLink>photo link: {props.photoLink}</ViewPhotoLink>
+                </Link>
+              </ViewPhotosContainer>
+            ) : props.signUpLink ? (
+              <ViewPhotosContainer>
+                <Link
+                  prefetch
+                  passHref
+                  href={props.signUpLink || '/404'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ViewPhotoLink>sign-up link: {props.signUpLink}</ViewPhotoLink>
+                </Link>
+              </ViewPhotosContainer>
+            ) : (
+              'sign-up link: NA'
+            )}
+          </ViewPhotoLink>
         </ViewPhotosContainer>
       </TextContainer>
     </MainContainer>

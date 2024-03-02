@@ -111,6 +111,8 @@ export default function MyApp() {
                   description={event.description}
                   imgPosition={'left'}
                   imageSrc={event.image}
+                  signUpLink={event.signUpLink}
+                  photoLink={event.photoLink}
                   events
                 />
               </EventItem>

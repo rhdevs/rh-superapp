@@ -4,12 +4,13 @@ import Image from 'next/image'
 import Carousel from '@/components/Carousel'
 
 const carouselPhotos = [
-  { id: 1, src: '/assets/sample-photos/photo1.jpg' },
-  { id: 2, src: '/assets/sample-photos/photo2.jpg' },
-  { id: 3, src: '/assets/sample-photos/photo3.jpg' },
-  { id: 4, src: '/assets/sample-photos/photo4.jpg' },
-  { id: 5, src: '/assets/sample-photos/photo4.jpg' },
-  { id: 6, src: '/assets/sample-photos/photo3.jpg' },
+  { id: 0, src: '/assets/sample-photos/jcrc.jpg' },
+  { id: 1, src: '/assets/sample-photos/dnd.jpg' },
+  { id: 2, src: '/assets/sample-photos/rhexrecruitment.jpg' },
+  { id: 3, src: '/assets/sample-photos/glassjar.jpg' },
+  { id: 4, src: '/assets/sample-photos/chec.jpg' },
+  { id: 5, src: '/assets/sample-photos/tomodachi.png' },
+  { id: 6, src: '/assets/sample-photos/supperhbus.jpg' },
   { id: 7, src: '/assets/sample-photos/photo2.jpg' },
   { id: 8, src: '/assets/sample-photos/photo1.jpg' },
 ]

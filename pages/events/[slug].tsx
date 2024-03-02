@@ -3,7 +3,9 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import descriptionBg from 'public/assets/events/description_bg.png'
 import breakpoints from '@/styles/breakpoints'
-import { Event, valentinesFundraiser } from '@/texts/common/dummy'
+import { Event, dnd, dummyData, valentinesFundraiser } from '@/texts/common/dummy'
+import { useRouter } from 'next/router'
+import { stringToSlug } from '@/utils/stringToSlug'
 
 // Styled Components
 const PageContainer = styled.div`
@@ -50,6 +52,7 @@ const EventDescription = styled.p`
   /* Add description styles here */
   font-size: 1rem;
   font-family: 'BryndanWrite';
+  white-space: pre-wrap;
 `
 const ViewPhotosContainer = styled.div`
   border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
@@ -103,10 +106,11 @@ const FlowerSticker = styled.img`
   right: -2vw; /* Adjust the right position as needed */
   z-index: 1; /* Ensure the sticker/image appears above the background */
 `
-
+const eventsArr: Event[] = dummyData
 const EventPage = () => {
   // Replace this with your actual image URL
-  const event: Event = valentinesFundraiser
+  const router = useRouter()
+  const event: Event = eventsArr.find((e) => stringToSlug(e.name) === router.query.slug) || dnd
   return (
     <>
       <NavBar />
@@ -117,7 +121,6 @@ const EventPage = () => {
           <HeartSticker src="/assets/events/stickers/heart_sticker.png" alt="Heart Sticker" />
           <EventImage src={event.image.src} alt="Event Image" />
         </ImageContainer>
-
         <DescriptionContainer>
           <MoonSticker src="/assets/events/stickers/moon_sticker.png" alt="Moon Sticker" />
           <LightningSticker
@@ -126,16 +129,30 @@ const EventPage = () => {
           />
           <EventDescription>{event.description}</EventDescription>
         </DescriptionContainer>
-        <ViewPhotosContainer>
-          <Link
-            prefetch
-            passHref
-            href="https://dummylinkphoto.com"
-            style={{ textDecoration: 'none' }}
-          >
-            <ViewPhotoLink>pictures: https://dummylinkphoto.com</ViewPhotoLink>
-          </Link>
-        </ViewPhotosContainer>
+        {event.signUpLink && !event.photoLink && (
+          <ViewPhotosContainer>
+            <Link
+              prefetch
+              passHref
+              href={event.signUpLink || '/404'}
+              style={{ textDecoration: 'none' }}
+            >
+              <ViewPhotoLink>sign-up link: {event.signUpLink}</ViewPhotoLink>
+            </Link>
+          </ViewPhotosContainer>
+        )}
+        {event.photoLink && (
+          <ViewPhotosContainer>
+            <Link
+              prefetch
+              passHref
+              href={event.photoLink || '/404'}
+              style={{ textDecoration: 'none' }}
+            >
+              <ViewPhotoLink>pictures: {event.photoLink}</ViewPhotoLink>
+            </Link>
+          </ViewPhotosContainer>
+        )}
       </PageContainer>
     </>
   )
