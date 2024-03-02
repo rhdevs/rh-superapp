@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Image from 'next/image'
 
 import { navTitles } from '@/texts/common/navTitles'
 import NavItem from './NavItem'
@@ -14,13 +15,11 @@ const MainContainer = styled.div<{ isVisible: boolean }>`
   ${(props) => props.isVisible && 'position: fixed;'}
   top: ${(props) => (props.isVisible ? 0 : `-${NAV_BAR_HEIGHT}`)};
   transition: top 0.3s;
-  background-color: ${(props) => `${props.theme.palette.common.black}`};
 `
 
 const NavItemContainer = styled.div`
   height: ${NAV_BAR_HEIGHT};
   display: flex;
-  margin-left: 3rem;
 
   a + a {
     margin-left: 2rem;
@@ -29,6 +28,18 @@ const NavItemContainer = styled.div`
 
 const NavBarSpace = styled.div<{ isVisible: boolean }>`
   height: ${(props) => (props.isVisible ? NAV_BAR_HEIGHT : '0')};
+`
+
+const ImageContainer = styled.div`
+  height: ${NAV_BAR_HEIGHT};
+  display: flex;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+
+  a + a {
+    margin-left: 2rem;
+  }
 `
 
 function NavBar() {
@@ -53,6 +64,9 @@ function NavBar() {
     <>
       <MainContainer isVisible={isVisible}>
         <NavItemContainer>
+          <ImageContainer>
+            <Image src="/assets/rh-logo.png" width={50} height={50} alt="RH logo" />
+          </ImageContainer>
           {navTitles.map((item, index) => (
             <NavItem
               key={index}

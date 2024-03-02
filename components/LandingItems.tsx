@@ -88,10 +88,7 @@ const EventContext = createContext<EventContextInterface>(defaultEventContext)
  * @returns <ParallaxBanner> component
  */
 export const ParallaxHero = () => (
-  <ParallaxBanner
-    layers={[{ image: 'https://picsum.photos/2560/1440', speed: -30 }]}
-    style={{ aspectRatio: '2 / 1' }}
-  />
+  <ParallaxBanner layers={[{ image: '/assets/sample_photos/photo1.jpg', speed: -30 }]} />
 )
 
 /**
@@ -135,6 +132,7 @@ const EventList = () => {
     <EventContainer>
       {dummyData.map((item: Event) => (
         <EventItem
+          key={item.id.toString()}
           id={item.id.toString()}
           onClick={() => {
             alert('put modal here pls')

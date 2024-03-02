@@ -1,9 +1,10 @@
 import React from 'react'
 import Image, { StaticImageData } from 'next/image'
+import Link from 'next/link'
 import styled, { keyframes, FontType, useTheme } from 'styled-components'
 import { fontTypeCss } from '@/styles/sample-rhdevs-website/index.styled'
-
-import imgPlaceholder from '@/assets/sample-rhdevs-website/noimg.png'
+import imgPlaceholder from '@/public/assets/noimg.png'
+import { stringToSlug } from '@/utils/stringToSlug'
 
 const fadeInUp = keyframes`
     from {
@@ -25,6 +26,7 @@ export const MainContainer = styled.div<{
   animation-name: ${fadeInUp};
   display: grid;
   grid-template-rows: minmax(0, 1fr);
+  text-align: center;
   grid-template-columns: ${(props) => props.imgPosition && 'auto'} auto;
   grid-template-areas: '${(props) => props.imgPosition === 'left' && 'image'} text ${(props) =>
     props.imgPosition === 'right' && 'image'}';
@@ -43,7 +45,7 @@ export const MainContainer = styled.div<{
   }
 `
 
-export const ImageContainer = styled(Image)`
+export const ImageContainer = styled.div`
   object-fit: contain;
   max-height: 350px;
   max-width: 350px;
@@ -63,19 +65,36 @@ export const TextContainer = styled.div`
   gap: 1rem;
 `
 
-export const Title = styled.h2<{ events?: boolean; fontType: FontType }>`
-  color: ${(props) => (props.events ? 'white' : props.theme.palette.primary)};
+export const Title = styled.h1<{ events?: boolean; fontType: FontType }>`
+  color: ${(props) => (props.events ? 'Black' : props.theme.palette.primary)};
   ${fontTypeCss}
   margin-block: 0;
+  &:hover {
+    color: ${(props) => (props.events ? '#555' : props.theme.palette.secondary)};
+  }
+  font-family: 'BryndanWrite';
 `
 
 export const Body = styled.p<{ events?: boolean; fontType: FontType }>`
-  ${(props) => `color: ${props.theme.palette.common.gray};`}
-  ${fontTypeCss}
+  ${(props) => `color: ${props.theme.palette.common.black};`}
   font-size: 1.1rem;
   white-space: pre-wrap;
   margin: 0;
   text-align: justify;
+  font-family: 'BryndanWrite';
+`
+
+const ViewPhotosContainer = styled.div`
+  border-radius: 1rem; /* Similar to "rounded-m" in Tailwind CSS */
+  background-color: #ffffff; /* Add a background color */
+  padding: 0.2 rem; /* Add padding for spacing */
+  width: 100%;
+  margin-top: 20px;
+`
+const ViewPhotoLink = styled.p`
+  color: #000000;
+  font-family: 'BryndanWrite';
+  break-word: break-all;
 `
 
 type Props = {
@@ -84,6 +103,8 @@ type Props = {
   imgPosition?: 'left' | 'right' | undefined
   imageSrc?: StaticImageData
   events?: boolean
+  signUpLink?: string | null
+  photoLink?: string | null
 } & typeof defaultProps
 
 const defaultProps: {
@@ -103,15 +124,55 @@ function PageSectionComponent(props: Props) {
   return (
     <MainContainer imgPosition={props.imgPosition}>
       {props.imgPosition && (
-        <ImageContainer src={props.imageSrc ?? imgPlaceholder} alt={props.title} />
+        <ImageContainer>
+          <Image
+            src={props.imageSrc?.src ?? imgPlaceholder}
+            height={300}
+            width={300}
+            alt={props.title}
+            // priority={false}
+          />
+        </ImageContainer>
       )}
       <TextContainer>
-        <Title fontType={sectionTitle} events={props.events}>
-          {props.title}
-        </Title>
+        <Link href={'events/' + stringToSlug(props.title)} style={{ textDecoration: 'none' }}>
+          <Title fontType={sectionTitle} events={props.events}>
+            {props.title}
+          </Title>
+        </Link>
+
         <Body fontType={sectionText} events={props.events}>
           {props.description}
         </Body>
+        <ViewPhotosContainer>
+          <ViewPhotoLink>
+            {props.photoLink ? (
+              <ViewPhotosContainer>
+                <Link
+                  prefetch
+                  passHref
+                  href={props.photoLink || '/404'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ViewPhotoLink>photo link: {props.photoLink}</ViewPhotoLink>
+                </Link>
+              </ViewPhotosContainer>
+            ) : props.signUpLink ? (
+              <ViewPhotosContainer>
+                <Link
+                  prefetch
+                  passHref
+                  href={props.signUpLink || '/404'}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <ViewPhotoLink>sign-up link: {props.signUpLink}</ViewPhotoLink>
+                </Link>
+              </ViewPhotosContainer>
+            ) : (
+              'sign-up link: NA'
+            )}
+          </ViewPhotoLink>
+        </ViewPhotosContainer>
       </TextContainer>
     </MainContainer>
   )

@@ -17,7 +17,7 @@ const activeCss = css`
 `
 
 const inactiveCss = css`
-  color: ${(props) => props.theme.palette.common.white};
+  color: ${(props) => props.theme.palette.common.black};
   &:hover {
     font-size: 130%;
   }

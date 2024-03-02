@@ -6,7 +6,9 @@ import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Button, Dropdown, Space } from 'antd'
 import styled from 'styled-components'
-import { Event, dummyData } from '@/texts/common/dummy'
+import { dummyData } from '@/texts/common/dummy'
+import PageNavBar from '@/components/PageNavBar'
+import NavBar from '@/components/NavBar'
 
 const items: MenuProps['items'] = [
   {
@@ -52,6 +54,22 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `
 
+const Title = styled.div`
+  font-size: 4rem;
+  justify-content: center;
+  display: flex;
+  font-weight: 800;
+  font-family: 'BryndanWrite';
+`
+
+const EventsAvailable = styled.div`
+  margin-top: 40px;
+  font-size: 2rem;
+  justify-content: center;
+  display: flex;
+  font-family: 'BryndanWrite';
+`
+
 const EventsWrapper = styled.div`
   display: flex
   flex-direction: row;
@@ -66,20 +84,38 @@ const EventHeader = styled.h1`
 `
 
 const SearchBarWrapper = styled.div`
-  padding: 10px;
-  margin: 0 auto;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: row;
 
   input {
-    min-width: 250px;
+    min-width: 200px;
   }
 `
 
 const SearchBar = styled.input`
+  margin-right: 5px;
   width: 100%;
   padding: 1px;
+  border-radius: 5px;
   type: text;
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.7rem;
+  }
+`
+
+const DropdownWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  white-space: nowrap;
+  align-items: center;
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 0.7rem;
+  }
 `
 
 const EventContainer = styled.button`
@@ -120,23 +156,29 @@ interface EventContextInterface {
   searchString: string
   setSearchString: (s: string) => void
   sortType: string
+  setSortType: (s: string) => void
   sortEvents: (s: string) => void
-  filterEvents: (s: string) => void
+  query: string
+  setQuery: (s: string) => void
 }
 
 const defaultEventContext: EventContextInterface = {
   searchString: '',
   setSearchString: () => {},
   sortType: '',
+  setSortType: () => {},
   sortEvents: () => {},
-  filterEvents: () => {},
+  query: '',
+  setQuery: () => {},
 }
 
 const EventContext = createContext<EventContextInterface>(defaultEventContext)
 
-
 const EventSearch = () => {
-  const { searchString, setSearchString, sortType, sortEvents, filterEvents } = useContext(EventContext)
+  const { searchString, setSearchString, setSortType, setQuery } = useContext(EventContext)
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    setSortType(key)
+  }
   return (
     <SearchBarWrapper>
       <SearchBar
@@ -145,12 +187,25 @@ const EventSearch = () => {
           setSearchString(e.target.value)
         }}
       />
-      <Button type="primary" title="Search" onClick={() => {
-        console.log("Search:" + searchString)
-          filterEvents(searchString)
-        }} >
-          Search
-        </Button>
+      <Button
+        type="primary"
+        title="Search"
+        onClick={() => {
+          setQuery(searchString.trim())
+        }}
+      >
+        Search
+      </Button>
+      <DropdownWrapper>
+        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              Sort by
+              <DownOutlined />
+            </Space>
+          </a>
+        </Dropdown>
+      </DropdownWrapper>
     </SearchBarWrapper>
   )
 }
@@ -160,13 +215,24 @@ export default function Events() {
   const [eventsArr, setEventsArr] = useState(defaultList)
   const [sortType, setSortType] = useState('0')
   const [search, setSearch] = useState('')
+  const [isNextVisible, setIsNextVisible] = useState(false)
+  const [isPrevVisible, setIsPrevVisible] = useState(false)
+  const [pageCount, setPageCount] = useState(1)
+  const [query, setQuery] = useState('')
+  const [eventsDisplayed, setEventsDisplayed] = useState(
+    defaultList.length <= 10 ? defaultList : defaultList.slice(0, 9),
+  )
+  const [eventCount, setEventCount] = useState(defaultList.length)
 
-  const onClick: MenuProps['onClick'] = ({ key }) => {
-    setSortType(key)
+  const showFirstPage = () => {
+    setEventsDisplayed(eventsArr.length <= 10 ? defaultList : defaultList.slice(0, 9))
+    setEventCount(eventsArr.length)
+    setPageCount(1)
+    eventCount < 10 && setIsNextVisible(false)
+    eventCount >= 10 && setIsNextVisible(true)
   }
 
   const sortEvents = (key) => {
-    console.log("sorting")
     const sortProperty = types[key]
     const sorted = [...eventsArr].sort((a, b) => {
       if (typeof a[sortProperty] === 'string') {
@@ -194,27 +260,66 @@ export default function Events() {
       }
     })
     setEventsArr(sorted)
+    showFirstPage()
   }
 
-  useEffect(() => {
-    sortEvents(sortType)
-  }, [sortType])
+  const navigateToNext = () => {
+    setPageCount(pageCount + 1)
+    setIsPrevVisible(true)
+  }
 
-  const filterEvents = (query) => {
-    if (query == '') {
-      setEventsArr(defaultList);
-      sortEvents(sortType);
+  const navigateToPrev = () => {
+    setPageCount(pageCount - 1)
+    setIsNextVisible(true)
+    pageCount == 1 && setIsPrevVisible(false)
+  }
+
+  // First useEffect: Update eventCount when the query changes
+  useEffect(() => {
+    console.log('Query changed!')
+    console.log('Query: ' + query)
+
+    // Check if the query is blank or empty
+    if (query.trim() === '') {
+      setEventCount(defaultList.length)
+      setPageCount(1)
     } else {
-      const realQuery = query.toLowerCase();
+      const realQuery = query.toLowerCase()
       const filtered = defaultList.filter((event) => {
         return searchedCategories.some((type) => {
-          return event[type].toLowerCase().includes(realQuery);
-        });
-      });
-      setEventsArr(filtered);
+          return event[type].toLowerCase().includes(realQuery)
+        })
+      })
+      setEventCount(filtered.length)
+      setEventsArr(filtered)
     }
-  };
-  
+  }, [query, defaultList])
+
+  // Second useEffect: Update eventsArr based on the filtered query
+  useEffect(() => {
+    console.log('Events Array Refreshed!')
+    const realQuery = query.toLowerCase()
+    const filtered = defaultList.filter((event) => {
+      return searchedCategories.some((type) => {
+        return event[type].toLowerCase().includes(realQuery)
+      })
+    })
+    setEventsArr(filtered)
+  }, [query, defaultList])
+
+  // Third useEffect: Update eventsDisplayed and isNextVisible based on eventCount and pageCount
+  useEffect(() => {
+    console.log('Page Count Changed!')
+    console.log('Page: ' + pageCount)
+    console.log('EventCount: ' + eventCount)
+
+    const startIndex = (pageCount - 1) * 10
+    const endIndex = Math.min(pageCount * 10, eventCount)
+    setEventsDisplayed(eventsArr.slice(startIndex, endIndex))
+
+    pageCount === 1 ? setIsPrevVisible(false) : setIsPrevVisible(true)
+    eventCount < pageCount * 10 ? setIsNextVisible(false) : setIsNextVisible(true)
+  }, [pageCount, eventCount, eventsArr])
 
   return (
     <EventContext.Provider
@@ -222,34 +327,42 @@ export default function Events() {
         // TODO consider wrapping it in a useMemo hook to prevent unnecessary re-renders
         searchString: search,
         sortType: sortType,
+        setSortType: setSortType,
         setSearchString: setSearch,
         sortEvents: sortEvents,
-        filterEvents: filterEvents
+        query: query,
+        setQuery: setQuery,
       }}
     >
-    <InformationMainContainer>
-      <HeaderWrapper>
-        <EventSearch />
-        <Dropdown menu={{ selectable: true, defaultSelectedKeys: ['0'], items, onClick }}>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space>
-              Sort by
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
-      </HeaderWrapper>
-      {eventsArr.map((event, index) => (
-        <PageSectionComponent
-          key={index}
-          title={event.name}
-          description={event.description}
-          imgPosition={index % 2 === 0 ? 'left' : 'right'}
-          imageSrc={event.image}
-          events
-        />
-      ))}
-    </InformationMainContainer>
+      <NavBar />
+      <InformationMainContainer>
+        <Title>UPCOMING EVENTS</Title>
+        <HeaderWrapper>
+          <EventSearch />
+          <EventsAvailable>
+            {eventCount} events available, showing events {pageCount * 10 - 9} to{' '}
+            {Math.min(pageCount * 10, eventCount)}
+          </EventsAvailable>
+        </HeaderWrapper>
+        {eventsDisplayed.map((event, index) => (
+          <PageSectionComponent
+            key={index}
+            title={event.name}
+            description={event.description}
+            imgPosition={index % 2 === 0 ? 'left' : 'right'}
+            imageSrc={event.image}
+            signUpLink={event.signUpLink}
+            photoLink={event.photoLink}
+            events
+          />
+        ))}
+      </InformationMainContainer>
+      <PageNavBar
+        navigateToNext={navigateToNext}
+        navigateToPrev={navigateToPrev}
+        isNextVisible={isNextVisible}
+        isPrevVisible={isPrevVisible}
+      />
     </EventContext.Provider>
   )
 }
